@@ -1,0 +1,76 @@
+{% comment %}
+  Hero Editorial Section - Stratos Theme
+  Cinematic full-bleed hero banner with brand heritage statement and Discover CTA.
+{% endcomment %}
+
+<section class="editorial-hero">
+  <img
+    class="editorial-hero-bg"
+    src="{{ section.settings.image | default: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1920&q=85' }}"
+    alt="{{ section.settings.headline | default: 'The Intentionality of Linen' }}"
+    width="1920"
+    height="1080"
+    loading="eager"
+  >
+  <div class="editorial-hero-content">
+    <div class="editorial-eyebrow">{{ section.settings.eyebrow | default: 'EDITION 04 / TIMELESS SILHOUETTES' }}</div>
+    <h2 class="editorial-headline font-sans">{{ section.settings.headline | default: 'Designed for Intentionality. Woven for Longevity.' }}</h2>
+    <p class="editorial-deck">
+      {{ section.settings.description | default: 'Rooted in the organic resonance of Normandy flax, each garment is sculpted with zero-waste principles and timeless draping.' }}
+    </p>
+    <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="btn-secondary-light">
+      <span>{{ section.settings.btn_text | default: 'EXPLORE THE CATALOGUE' }}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Editorial",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "EDITION 04 / TIMELESS SILHOUETTES"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Main Headline",
+      "default": "Designed for Intentionality. Woven for Longevity."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Sub-headline description",
+      "default": "Rooted in the organic resonance of Normandy flax, each garment is sculpted with zero-waste principles and timeless draping."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "EXPLORE THE CATALOGUE"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Editorial"
+    }
+  ]
+}
+{% endschema %}

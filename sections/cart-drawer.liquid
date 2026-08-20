@@ -1,0 +1,104 @@
+{% comment %}
+  Cart Drawer Section - Stratos Theme
+  Slide-out cart drawer with dynamic item updates, free shipping meter, promo code apply, and fast checkout CTA.
+{% endcomment %}
+
+<!-- Overlay Backdrop -->
+<div class="cart-drawer-overlay" id="CartOverlay" data-action="close-cart"></div>
+
+<!-- Slide-Out Drawer -->
+<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+  
+  <!-- Header -->
+  <div class="cart-drawer-header">
+    <h3 class="cart-drawer-title font-sans" id="CartDrawerTitle">
+      {{ section.settings.title | default: 'YOUR BAG' }}
+    </h3>
+    <button class="icon-btn cart-close-btn" data-action="close-cart" aria-label="Close cart drawer">
+      ✕
+    </button>
+  </div>
+
+  <!-- Free Shipping Meter -->
+  {%- if section.settings.enable_shipping_meter -%}
+    <div class="shipping-meter-box" id="ShippingMeterBox">
+      <div class="shipping-meter-msg" id="ShippingMeterMsg">
+        Add <strong>$30.00</strong> more to unlock <strong>Free Carbon-Neutral Shipping</strong>
+      </div>
+      <div class="shipping-meter-bar">
+        <div class="shipping-meter-fill" id="ShippingMeterFill" style="width: 80%;"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Cart Body: Items List -->
+  <div class="cart-drawer-body" id="CartDrawerBody">
+    <!-- Populated dynamically via Vanilla JS in application.js -->
+  </div>
+
+  <!-- Footer: Totals, Promos & Checkout -->
+  <div class="cart-drawer-footer">
+    
+    <!-- Promo Code Form -->
+    <div class="cart-promo-row">
+      <input type="text" id="CartPromoInput" class="cart-promo-input" placeholder="Promo code (e.g. STRATOS10)" aria-label="Discount code">
+      <button type="button" id="CartPromoBtn" class="cart-promo-btn">APPLY</button>
+    </div>
+
+    <!-- Carbon Neutral Offset Checkbox -->
+    <div style="display: flex; align-items: center; gap: var(--spacing-2xs); margin-bottom: var(--spacing-sm); font-size: var(--text-xs); color: var(--color-text-muted);">
+      <input type="checkbox" id="CarbonOffsetCheckbox" checked style="accent-color: var(--color-primary);">
+      <label for="CarbonOffsetCheckbox">Include $1.50 Carbon-Neutral Offset (Included)</label>
+    </div>
+
+    <!-- Subtotal -->
+    <div class="cart-subtotal-row">
+      <span class="cart-subtotal-label">SUBTOTAL</span>
+      <span class="cart-subtotal-amount" id="CartSubtotalAmount">$230.00</span>
+    </div>
+
+    <!-- Checkout Action Button -->
+    <a href="/checkout" class="cart-checkout-btn">
+      <span>CHECKOUT</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+
+    <p style="text-align: center; font-size: 0.68rem; color: var(--color-text-subtle); margin-top: var(--spacing-2xs);">
+      Taxes and duties calculated at next step
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Drawer Title",
+      "default": "YOUR BAG"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shipping_meter",
+      "label": "Enable Free Shipping Progress Meter",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Free Shipping Threshold ($)",
+      "default": 150
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart Drawer"
+    }
+  ]
+}
+{% endschema %}

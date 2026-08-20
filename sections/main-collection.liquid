@@ -1,0 +1,269 @@
+{% comment %}
+  Main Collection Section - Stratos Theme
+  Interactive collection layout with column density switchers (2, 3, 4 cols), dual-axis filters, and INR currency formatting.
+{% endcomment %}
+
+<section class="collection-section">
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <div class="collection-hero">
+      <h1 class="collection-title font-sans">
+        {{ collection.title | default: 'Catalogue' }}
+      </h1>
+      <p class="collection-subtitle">
+        {{ collection.description | default: 'Curated essentials across T-Shirts, Hoodies, and Sweatpants. Categorized by Casual, Polo, Oversized, and Essential fits in certified organic fabrics.' }}
+      </p>
+    </div>
+
+    <!-- Filter, Sort & Column Toolbar -->
+    <div class="collection-filter-bar">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+        
+        <!-- Primary Type Filter Tabs -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div class="filter-pills-group" role="tablist" aria-label="Garment Type Categories">
+            <button type="button" class="filter-pill is-active" data-filter-type="all">ALL GARMENTS (6)</button>
+            <button type="button" class="filter-pill" data-filter-type="t-shirt">T-SHIRTS (3)</button>
+            <button type="button" class="filter-pill" data-filter-type="hoodies">HOODIES (2)</button>
+            <button type="button" class="filter-pill" data-filter-type="sweatpants">SWEATPANTS (1)</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--spacing-sm); flex-wrap: wrap;">
+            <!-- Column Density & Axis Controls -->
+            <div class="grid-col-switchers" aria-label="Grid Column Layout">
+              <span style="font-size: 0.65rem; font-weight: 700; color: var(--color-text-subtle); padding-inline: 0.35rem;">LAYOUT:</span>
+              <button type="button" class="grid-col-btn" data-grid-cols="2" title="2 Large Columns">2</button>
+              <button type="button" class="grid-col-btn is-active" data-grid-cols="3" title="3 Standard Columns">3</button>
+              <button type="button" class="grid-col-btn" data-grid-cols="4" title="4 Dense Columns">4</button>
+              <button type="button" class="grid-col-btn" data-grid-cols="axis" title="Horizontal Axis Slider">↔ AXIS</button>
+            </div>
+
+            <!-- Sort Select -->
+            <div class="sort-select-wrapper">
+              <label for="SortBy">Sort:</label>
+              <select id="SortBy" class="sort-select">
+                <option value="featured">Featured</option>
+                <option value="price-ascending">Price: Low to High</option>
+                <option value="price-descending">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Style / Category Sub-filter Pills -->
+        <div class="category-subfilters-group" role="tablist" aria-label="Style Fit Categories">
+          <span style="font-size: 0.65rem; font-weight: 700; color: #7E3E25; text-transform: uppercase;">STYLE FIT:</span>
+          <button type="button" class="subfilter-pill is-active" data-filter-category="all">ALL STYLES</button>
+          <button type="button" class="subfilter-pill" data-filter-category="casual">CASUAL (1)</button>
+          <button type="button" class="subfilter-pill" data-filter-category="polo">POLO (1)</button>
+          <button type="button" class="subfilter-pill" data-filter-category="oversized">OVERSIZED (2)</button>
+          <button type="button" class="subfilter-pill" data-filter-category="essential">ESSENTIAL (2)</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid {{ section.settings.default_grid_columns | default: 'grid-cols-3' }}" id="ProductGridContainer">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <!-- 01. Casual T-Shirt -->
+        <div class="product-card" data-product-handle="casual-t-shirt" data-type="t-shirt" data-category="casual" data-price="599">
+          <div class="product-card-media" aria-label="Casual T-Shirt image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('casual-t-shirt')">
+              <div class="card-carousel-slide"><img src="assets/images/offwhite_casual_t-shirt_1.png" alt="Casual T-Shirt Off White"></div>
+              <div class="card-carousel-slide"><img src="assets/images/beige_casual_t-shirt_1.png" alt="Casual T-Shirt Beige"></div>
+              <div class="card-carousel-slide"><img src="assets/images/jade_casual_t-shirt_1.png" alt="Casual T-Shirt Jade"></div>
+              <div class="card-carousel-slide"><img src="assets/images/coral_casual_t-shirt_1.png" alt="Casual T-Shirt Coral"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'casual-t-shirt')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'casual-t-shirt')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'casual-t-shirt', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'casual-t-shirt', 1)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'casual-t-shirt', 2)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'casual-t-shirt', 3)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">POPULAR · T-SHIRT · CASUAL</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('casual-t-shirt')" class="product-card-title">Casual T-Shirt</a>
+            <div class="product-card-price">₹599</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #F5F2EB;" title="Off White" onmouseenter="cardCarouselGoTo(event, 'casual-t-shirt', 0)" onclick="selectCatalogueProductVariant('casual-t-shirt', 'Off White')"></span>
+              <span class="mini-swatch" style="background-color: #E6DCC6;" title="Beige" onmouseenter="cardCarouselGoTo(event, 'casual-t-shirt', 1)" onclick="selectCatalogueProductVariant('casual-t-shirt', 'Beige')"></span>
+              <span class="mini-swatch" style="background-color: #ABCDBC;" title="Jade" onmouseenter="cardCarouselGoTo(event, 'casual-t-shirt', 2)" onclick="selectCatalogueProductVariant('casual-t-shirt', 'Jade')"></span>
+              <span class="mini-swatch" style="background-color: #FF7B6E;" title="Coral" onmouseenter="cardCarouselGoTo(event, 'casual-t-shirt', 3)" onclick="selectCatalogueProductVariant('casual-t-shirt', 'Coral')"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02. Polo T-Shirt -->
+        <div class="product-card" data-product-handle="polo-t-shirt" data-type="t-shirt" data-category="polo" data-price="699">
+          <div class="product-card-media" aria-label="Polo T-Shirt image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('polo-t-shirt')">
+              <div class="card-carousel-slide"><img src="assets/images/black_polo_t-shirt_1.png" alt="Polo T-Shirt Black"></div>
+              <div class="card-carousel-slide"><img src="assets/images/maroon_polo_t-shirt_1.png" alt="Polo T-Shirt Maroon"></div>
+              <div class="card-carousel-slide"><img src="assets/images/coffeebrown_polo_t-shirt_1.png" alt="Polo T-Shirt Coffee Brown"></div>
+              <div class="card-carousel-slide"><img src="assets/images/brickred_polo_t-shirt_1.png" alt="Polo T-Shirt Brick Red"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'polo-t-shirt')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'polo-t-shirt')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'polo-t-shirt', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'polo-t-shirt', 1)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'polo-t-shirt', 2)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'polo-t-shirt', 3)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">CLASSIC · T-SHIRT · POLO</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('polo-t-shirt')" class="product-card-title">Polo T-Shirt</a>
+            <div class="product-card-price">₹699</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #1C1C1C;" title="Black" onmouseenter="cardCarouselGoTo(event, 'polo-t-shirt', 0)" onclick="selectCatalogueProductVariant('polo-t-shirt', 'Black')"></span>
+              <span class="mini-swatch" style="background-color: #800000;" title="Maroon" onmouseenter="cardCarouselGoTo(event, 'polo-t-shirt', 1)" onclick="selectCatalogueProductVariant('polo-t-shirt', 'Maroon')"></span>
+              <span class="mini-swatch" style="background-color: #6F4E37;" title="Coffee Brown" onmouseenter="cardCarouselGoTo(event, 'polo-t-shirt', 2)" onclick="selectCatalogueProductVariant('polo-t-shirt', 'Coffee Brown')"></span>
+              <span class="mini-swatch" style="background-color: #CB4154;" title="Brick Red" onmouseenter="cardCarouselGoTo(event, 'polo-t-shirt', 3)" onclick="selectCatalogueProductVariant('polo-t-shirt', 'Brick Red')"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03. Oversized T-Shirt -->
+        <div class="product-card" data-product-handle="oversized-t-shirt" data-type="t-shirt" data-category="oversized" data-price="999">
+          <div class="product-card-media" aria-label="Oversized T-Shirt image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('oversized-t-shirt')">
+              <div class="card-carousel-slide"><img src="assets/images/cooper_oversized_t-shirt_1.png" alt="Oversized T-Shirt Copper"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lavender_oversized_t-shirt_1.png" alt="Oversized T-Shirt Lavender"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lightbabypink_oversized_t-shirt_1.png" alt="Oversized T-Shirt Light Baby Pink"></div>
+              <div class="card-carousel-slide"><img src="assets/images/white_oversized_t-shirt_1.png" alt="Oversized T-Shirt White"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'oversized-t-shirt')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'oversized-t-shirt')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'oversized-t-shirt', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-t-shirt', 1)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-t-shirt', 2)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-t-shirt', 3)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">STREETWEAR · T-SHIRT · OVERSIZED</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('oversized-t-shirt')" class="product-card-title">Oversized T-Shirt</a>
+            <div class="product-card-price">₹999</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #B87333;" title="Copper" onmouseenter="cardCarouselGoTo(event, 'oversized-t-shirt', 0)" onclick="selectCatalogueProductVariant('oversized-t-shirt', 'Copper')"></span>
+              <span class="mini-swatch" style="background-color: #C9B4E6;" title="Lavender" onmouseenter="cardCarouselGoTo(event, 'oversized-t-shirt', 1)" onclick="selectCatalogueProductVariant('oversized-t-shirt', 'Lavender')"></span>
+              <span class="mini-swatch" style="background-color: #FFD6E7;" title="Light Baby Pink" onmouseenter="cardCarouselGoTo(event, 'oversized-t-shirt', 2)" onclick="selectCatalogueProductVariant('oversized-t-shirt', 'Light Baby Pink')"></span>
+              <span class="mini-swatch" style="background-color: #FFFFFF;" title="White" onmouseenter="cardCarouselGoTo(event, 'oversized-t-shirt', 3)" onclick="selectCatalogueProductVariant('oversized-t-shirt', 'White')"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04. Essential Hoodie -->
+        <div class="product-card" data-product-handle="essential-hoodie" data-type="hoodies" data-category="essential" data-price="1099">
+          <div class="product-card-media" aria-label="Essential Hoodie image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('essential-hoodie')">
+              <div class="card-carousel-slide"><img src="assets/images/black_essential_hoodie_1.png" alt="Essential Hoodie Black"></div>
+              <div class="card-carousel-slide"><img src="assets/images/coral_essential_hoodie_1.png" alt="Essential Hoodie Coral"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lightbabypink_essential_hoodie_1.png" alt="Essential Hoodie Light Baby Pink"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lavender_essential_hoodie_1.png" alt="Essential Hoodie Lavender"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'essential-hoodie')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'essential-hoodie')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'essential-hoodie', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'essential-hoodie', 1)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'essential-hoodie', 2)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'essential-hoodie', 3)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">BESTSELLER · HOODIES · ESSENTIAL</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('essential-hoodie')" class="product-card-title">Essential Hoodie</a>
+            <div class="product-card-price">₹1,099</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #1C1C1C;" title="Black" onmouseenter="cardCarouselGoTo(event, 'essential-hoodie', 0)" onclick="selectCatalogueProductVariant('essential-hoodie', 'Black')"></span>
+              <span class="mini-swatch" style="background-color: #FF7B6E;" title="Coral" onmouseenter="cardCarouselGoTo(event, 'essential-hoodie', 1)" onclick="selectCatalogueProductVariant('essential-hoodie', 'Coral')"></span>
+              <span class="mini-swatch" style="background-color: #FFD6E7;" title="Light Baby Pink" onmouseenter="cardCarouselGoTo(event, 'essential-hoodie', 2)" onclick="selectCatalogueProductVariant('essential-hoodie', 'Light Baby Pink')"></span>
+              <span class="mini-swatch" style="background-color: #C9B4E6;" title="Lavender" onmouseenter="cardCarouselGoTo(event, 'essential-hoodie', 3)" onclick="selectCatalogueProductVariant('essential-hoodie', 'Lavender')"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05. Oversized Hoodie -->
+        <div class="product-card" data-product-handle="oversized-hoodie" data-type="hoodies" data-category="oversized" data-price="1399">
+          <div class="product-card-media" aria-label="Oversized Hoodie image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('oversized-hoodie')">
+              <div class="card-carousel-slide"><img src="assets/images/black_oversized_hoodie_1.png" alt="Oversized Hoodie Black"></div>
+              <div class="card-carousel-slide"><img src="assets/images/maroon_oversized_hoodie_1.png" alt="Oversized Hoodie Maroon"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lightbabypink_oversized_hoodie_1.png" alt="Oversized Hoodie Light Baby Pink"></div>
+              <div class="card-carousel-slide"><img src="assets/images/lavender_oversized_hoodie_1.png" alt="Oversized Hoodie Lavender"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'oversized-hoodie')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'oversized-hoodie')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'oversized-hoodie', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-hoodie', 1)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-hoodie', 2)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'oversized-hoodie', 3)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">WARM FLEECE · HOODIES · OVERSIZED</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('oversized-hoodie')" class="product-card-title">Oversized Hoodie</a>
+            <div class="product-card-price">₹1,399</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #1C1C1C;" title="Black" onmouseenter="cardCarouselGoTo(event, 'oversized-hoodie', 0)" onclick="selectCatalogueProductVariant('oversized-hoodie', 'Black')"></span>
+              <span class="mini-swatch" style="background-color: #800000;" title="Maroon" onmouseenter="cardCarouselGoTo(event, 'oversized-hoodie', 1)" onclick="selectCatalogueProductVariant('oversized-hoodie', 'Maroon')"></span>
+              <span class="mini-swatch" style="background-color: #FFD6E7;" title="Light Baby Pink" onmouseenter="cardCarouselGoTo(event, 'oversized-hoodie', 2)" onclick="selectCatalogueProductVariant('oversized-hoodie', 'Light Baby Pink')"></span>
+              <span class="mini-swatch" style="background-color: #C9B4E6;" title="Lavender" onmouseenter="cardCarouselGoTo(event, 'oversized-hoodie', 3)" onclick="selectCatalogueProductVariant('oversized-hoodie', 'Lavender')"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06. Essential Sweatpants -->
+        <div class="product-card" data-product-handle="essential-sweatpants" data-type="sweatpants" data-category="essential" data-price="1099">
+          <div class="product-card-media" aria-label="Essential Sweatpants image gallery">
+            <div class="card-carousel-track" data-current-slide="0" onclick="selectCatalogueProduct('essential-sweatpants')">
+              <div class="card-carousel-slide"><img src="assets/images/black_sweatpants_1.png" alt="Essential Sweatpants Full"></div>
+              <div class="card-carousel-slide"><img src="assets/images/black_sweatpants_2.png" alt="Essential Sweatpants Cuffs"></div>
+            </div>
+            <button type="button" class="card-carousel-btn card-carousel-prev" onclick="cardCarouselPrev(event, 'essential-sweatpants')" aria-label="Previous view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button type="button" class="card-carousel-btn card-carousel-next" onclick="cardCarouselNext(event, 'essential-sweatpants')" aria-label="Next view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="card-carousel-dots"><button type="button" class="card-carousel-dot is-active" onclick="cardCarouselGoTo(event, 'essential-sweatpants', 0)"></button><button type="button" class="card-carousel-dot" onclick="cardCarouselGoTo(event, 'essential-sweatpants', 1)"></button></div>
+          </div>
+          <div class="product-card-info">
+            <div class="product-card-category-tag">HEAVYWEIGHT · SWEATPANTS · ESSENTIAL</div>
+            <a href="javascript:void(0)" onclick="selectCatalogueProduct('essential-sweatpants')" class="product-card-title">Essential Sweatpants</a>
+            <div class="product-card-price">₹1,099</div>
+            <div class="product-card-sizes">XS • S • M • L • XL • XXL</div>
+            <div class="product-card-swatches">
+              <span class="mini-swatch" style="background-color: #1C1C1C;" title="Black" onmouseenter="cardCarouselGoTo(event, 'essential-sweatpants', 0)" onclick="selectCatalogueProductVariant('essential-sweatpants', 'Black')"></span>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "default_grid_columns",
+      "label": "Default Desktop Column Count",
+      "options": [
+        { "value": "grid-cols-2", "label": "2 Columns (Editorial)" },
+        { "value": "grid-cols-3", "label": "3 Columns (Standard Balanced)" },
+        { "value": "grid-cols-4", "label": "4 Columns (High Density)" }
+      ],
+      "default": "grid-cols-3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable Category Filter Pills",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable Sorting Dropdown",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Collection"
+    }
+  ]
+}
+{% endschema %}

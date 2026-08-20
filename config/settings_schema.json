@@ -1,0 +1,73 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Stratos - Faberelin Edition",
+    "theme_author": "Stratos Theme Architecture",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/stratos/shopify-theme",
+    "theme_support_url": "https://stratos-theme.com/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_base",
+        "label": "Base Background Color",
+        "default": "#FBF9F5"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_alt",
+        "label": "Alternate Background (Surface)",
+        "default": "#F3EFEA"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border Color",
+        "default": "#E8E2D9"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "playfair_display_n7"
+      }
+    ]
+  },
+  {
+    "name": "Cart Drawer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Enable Slide-Out Cart Drawer",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold ($)",
+        "default": 150
+      }
+    ]
+  }
+]

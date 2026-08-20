@@ -1,0 +1,163 @@
+{% comment %}
+  Footer Section - Stratos Theme
+  Customizable Multi-Column Editorial Footer (3 or 4 Columns).
+  Features: Brand narrative, newsletter subscribe box, catalogue links, shipping policies, and studio inquiries.
+{% endcomment %}
+
+<footer class="site-footer" id="SiteFooter">
+  <div class="container">
+    
+    <div class="footer-grid {{ section.settings.footer_columns | default: 'cols-4' }}" id="FooterGridContainer">
+      
+      <!-- 01. Column: Newsletter -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_1_title | default: 'NEWSLETTER' }}</h4>
+        <p class="footer-col-text">
+          {{ section.settings.col_1_text | default: 'Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories.' }}
+        </p>
+        <form class="newsletter-form" action="/contact#contact_form" method="post">
+          <input
+            type="email"
+            name="contact[email]"
+            class="newsletter-input"
+            placeholder="Your email address"
+            required
+            aria-label="Email Address for newsletter"
+          >
+          <button type="submit" class="newsletter-btn">
+            {{ section.settings.newsletter_btn_text | default: 'JOIN' }}
+          </button>
+        </form>
+      </div>
+
+      <!-- 02. Column: Navigation -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_2_title | default: 'CATALOGUE ITEMS' }}</h4>
+        <ul class="footer-links-list">
+          <li><a href="/products/casual-t-shirt" class="footer-link">Casual T-Shirt</a></li>
+          <li><a href="/products/polo-t-shirt" class="footer-link">Polo T-Shirt</a></li>
+          <li><a href="/products/oversized-t-shirt" class="footer-link">Oversized T-Shirt</a></li>
+          <li><a href="/products/essential-hoodie" class="footer-link">Essential Hoodie</a></li>
+          <li><a href="/products/oversized-hoodie" class="footer-link">Oversized Hoodie</a></li>
+          <li><a href="/products/essential-sweatpants" class="footer-link">Essential Sweatpants</a></li>
+        </ul>
+      </div>
+
+      <!-- 03. Column: Order Tracking -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_3_title | default: 'ORDER TRACKING' }}</h4>
+        <p class="footer-col-text">
+          {{ section.settings.col_3_text | default: 'Track real-time carbon-neutral shipment progress and carrier dispatch:' }}
+        </p>
+        <form class="tracking-form" action="/apps/tracking" method="get">
+          <input
+            type="text"
+            name="order_id"
+            class="tracking-input"
+            placeholder="#FBR-8924"
+            required
+            aria-label="Order or Tracking Number"
+          />
+          <button type="submit" class="tracking-btn">
+            {{ section.settings.tracking_btn_text | default: 'TRACK' }}
+          </button>
+        </form>
+      </div>
+
+      <!-- 04. Column: Support (5 Subgroups) -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_4_title | default: 'SUPPORT' }}</h4>
+        <ul class="footer-links-list">
+          <li><a href="/pages/contact-us" class="footer-link">1. Contact Us</a></li>
+          <li><a href="/policies/shipping-policy" class="footer-link">2. Shipping Policy</a></li>
+          <li><a href="/policies/refund-policy" class="footer-link">3. Refund Policy</a></li>
+          <li><a href="/policies/privacy-policy" class="footer-link">4. Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service" class="footer-link">5. Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright & Intentionality Tagline -->
+    <div class="footer-bottom-bar">
+      <div class="footer-copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | default: 'FABERELIN' }}. ALL RIGHTS RESERVED.
+      </div>
+      <div class="footer-tagline">
+        {{ section.settings.bottom_tagline | default: 'DESIGNED FOR INTENTIONALITY.' }}
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "footer_columns",
+      "label": "Desktop Column Layout",
+      "options": [
+        { "value": "cols-4", "label": "4 Columns (Brand, Links, Shipping, Contact)" },
+        { "value": "cols-3", "label": "3 Columns (Newsletter, Shipping, Contact)" }
+      ],
+      "default": "cols-4"
+    },
+    {
+      "type": "text",
+      "id": "col_1_title",
+      "label": "Column 1 Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "textarea",
+      "id": "col_1_text",
+      "label": "Column 1 Description",
+      "default": "Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_btn_text",
+      "label": "Newsletter Button Text",
+      "default": "JOIN"
+    },
+    {
+      "type": "text",
+      "id": "col_2_title",
+      "label": "Column 2 Title",
+      "default": "COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "col_3_title",
+      "label": "Column 3 Title",
+      "default": "SHIPPING"
+    },
+    {
+      "type": "textarea",
+      "id": "col_3_text",
+      "label": "Column 3 Description",
+      "default": "Free worldwide shipping on all orders over $250. 30-day carbon-neutral returns."
+    },
+    {
+      "type": "text",
+      "id": "col_4_title",
+      "label": "Column 4 Title",
+      "default": "CONTACT"
+    },
+    {
+      "type": "text",
+      "id": "bottom_tagline",
+      "label": "Bottom Right Tagline",
+      "default": "DESIGNED FOR INTENTIONALITY."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

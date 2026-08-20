@@ -1,0 +1,300 @@
+{% comment %}
+  Main Customer Registration Section - Stratos Shopify Theme
+  Section-based customer sign up supporting first name, last name, email, password, and marketing opt-in.
+  Follows Shopify Theme 2.0 schema architecture with dynamic settings and image_url attributes.
+{% endcomment %}
+
+<section class="auth-section" data-section-id="{{ section.id }}" data-section-type="main-register">
+  <div class="container">
+    <div class="auth-grid {% if section.settings.show_editorial_image %}has-image{% endif %}">
+      
+      {%- if section.settings.show_editorial_image -%}
+        <div class="auth-editorial-column">
+          {%- if section.settings.editorial_image != blank -%}
+            <img
+              src="{{ section.settings.editorial_image | image_url: width: 1000 }}"
+              alt="{{ section.settings.editorial_image.alt | default: section.settings.heading | escape }}"
+              width="{{ section.settings.editorial_image.width | default: 800 }}"
+              height="{{ section.settings.editorial_image.height | default: 1000 }}"
+              loading="lazy"
+              class="auth-editorial-img"
+            >
+          {%- else -%}
+            <img
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85"
+              alt="{{ section.settings.heading | escape }}"
+              width="800"
+              height="1000"
+              loading="lazy"
+              class="auth-editorial-img"
+            >
+          {%- endif -%}
+          <div class="auth-editorial-overlay">
+            <div class="auth-editorial-caption">
+              <span class="auth-caption-eyebrow">{{ section.settings.image_eyebrow | default: 'ATELIER MEMBERSHIP' }}</span>
+              <p class="auth-caption-quote">{{ section.settings.image_quote | default: 'Become part of our intentional sustainable wardrobe circle.' }}</p>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="auth-form-column">
+        
+        <div class="auth-card is-active">
+          <div class="auth-header">
+            <span class="auth-eyebrow">{{ section.settings.eyebrow | default: 'MEMBERSHIP' }}</span>
+            <h1 class="auth-title font-sans">{{ section.settings.heading | default: 'Create Your Account' }}</h1>
+            <p class="auth-deck">{{ section.settings.subheading | default: 'Join the Faberelin circle for early access to limited flax drops and seamless checkout.' }}</p>
+          </div>
+
+          {%- form 'create_customer', class: 'auth-form' -%}
+            {%- if form.errors -%}
+              <div class="auth-error-banner" role="alert">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>{{ form.errors | default_errors }}</span>
+              </div>
+            {%- endif -%}
+
+            <div class="auth-row-dual">
+              <div class="auth-field">
+                <label for="RegisterFirstName-{{ section.id }}" class="auth-label">{{ section.settings.first_name_label | default: 'FIRST NAME' }}</label>
+                <input
+                  type="text"
+                  name="customer[first_name]"
+                  id="RegisterFirstName-{{ section.id }}"
+                  class="auth-input"
+                  autocomplete="given-name"
+                  placeholder="{{ section.settings.first_name_placeholder | default: 'First Name' }}"
+                  {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                >
+              </div>
+
+              <div class="auth-field">
+                <label for="RegisterLastName-{{ section.id }}" class="auth-label">{{ section.settings.last_name_label | default: 'LAST NAME' }}</label>
+                <input
+                  type="text"
+                  name="customer[last_name]"
+                  id="RegisterLastName-{{ section.id }}"
+                  class="auth-input"
+                  autocomplete="family-name"
+                  placeholder="{{ section.settings.last_name_placeholder | default: 'Last Name' }}"
+                  {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                >
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="RegisterEmail-{{ section.id }}" class="auth-label">{{ section.settings.email_label | default: 'EMAIL ADDRESS' }}</label>
+              <input
+                type="email"
+                name="customer[email]"
+                id="RegisterEmail-{{ section.id }}"
+                class="auth-input"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="{{ section.settings.email_placeholder | default: 'name@domain.com' }}"
+                required
+                {% if form.email %}value="{{ form.email }}"{% endif %}
+              >
+            </div>
+
+            <div class="auth-field">
+              <label for="RegisterPassword-{{ section.id }}" class="auth-label">{{ section.settings.password_label | default: 'PASSWORD' }}</label>
+              <input
+                type="password"
+                name="customer[password]"
+                id="RegisterPassword-{{ section.id }}"
+                class="auth-input"
+                autocomplete="new-password"
+                placeholder="{{ section.settings.password_placeholder | default: 'At least 8 characters' }}"
+                required
+              >
+            </div>
+
+            {%- if section.settings.enable_marketing_consent -%}
+              <div class="auth-checkbox-field">
+                <input
+                  type="checkbox"
+                  name="customer[accepts_marketing]"
+                  id="RegisterMarketing-{{ section.id }}"
+                  class="auth-checkbox"
+                  value="true"
+                  checked
+                >
+                <label for="RegisterMarketing-{{ section.id }}" class="auth-checkbox-label">
+                  {{ section.settings.marketing_consent_text | default: 'Subscribe to receive private preview access, lookbooks, and atelier journals.' }}
+                </label>
+              </div>
+            {%- endif -%}
+
+            <div class="auth-actions">
+              <button type="submit" class="btn-primary auth-submit-btn">
+                <span>{{ section.settings.submit_btn_text | default: 'CREATE ACCOUNT' }}</span>
+              </button>
+            </div>
+
+            <div class="auth-footer-nav">
+              <span class="auth-footer-text">{{ section.settings.have_account_text | default: 'Already have an account?' }}</span>
+              <a href="{{ routes.account_login_url }}" class="auth-link-primary">
+                {{ section.settings.sign_in_text | default: 'Sign In' }}
+              </a>
+            </div>
+          {%- endform -%}
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Register",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Editorial Column"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_editorial_image",
+      "label": "Show Editorial Column Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "editorial_image",
+      "label": "Editorial Image"
+    },
+    {
+      "type": "text",
+      "id": "image_eyebrow",
+      "label": "Image Eyebrow",
+      "default": "ATELIER MEMBERSHIP"
+    },
+    {
+      "type": "text",
+      "id": "image_quote",
+      "label": "Image Caption Quote",
+      "default": "Become part of our intentional sustainable wardrobe circle."
+    },
+    {
+      "type": "header",
+      "content": "Registration Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Badge",
+      "default": "MEMBERSHIP"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Create Your Account"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading Description",
+      "default": "Join the Faberelin circle for early access to limited flax drops and seamless checkout."
+    },
+    {
+      "type": "text",
+      "id": "first_name_label",
+      "label": "First Name Label",
+      "default": "FIRST NAME"
+    },
+    {
+      "type": "text",
+      "id": "first_name_placeholder",
+      "label": "First Name Placeholder",
+      "default": "First Name"
+    },
+    {
+      "type": "text",
+      "id": "last_name_label",
+      "label": "Last Name Label",
+      "default": "LAST NAME"
+    },
+    {
+      "type": "text",
+      "id": "last_name_placeholder",
+      "label": "Last Name Placeholder",
+      "default": "Last Name"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email Field Label",
+      "default": "EMAIL ADDRESS"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "name@domain.com"
+    },
+    {
+      "type": "text",
+      "id": "password_label",
+      "label": "Password Field Label",
+      "default": "PASSWORD"
+    },
+    {
+      "type": "text",
+      "id": "password_placeholder",
+      "label": "Password Placeholder",
+      "default": "At least 8 characters"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_marketing_consent",
+      "label": "Show Marketing Opt-in Checkbox",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "marketing_consent_text",
+      "label": "Marketing Opt-in Description",
+      "default": "Subscribe to receive private preview access, lookbooks, and atelier journals."
+    },
+    {
+      "type": "text",
+      "id": "submit_btn_text",
+      "label": "Submit Button Text",
+      "default": "CREATE ACCOUNT"
+    },
+    {
+      "type": "text",
+      "id": "have_account_text",
+      "label": "Have Account Prompt Text",
+      "default": "Already have an account?"
+    },
+    {
+      "type": "text",
+      "id": "sign_in_text",
+      "label": "Sign In Link Text",
+      "default": "Sign In"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Register",
+      "settings": {
+        "show_editorial_image": true,
+        "heading": "Create Your Account",
+        "submit_btn_text": "CREATE ACCOUNT"
+      }
+    }
+  ]
+}
+{% endschema %}

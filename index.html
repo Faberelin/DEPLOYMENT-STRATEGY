@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FABERELIN &ndash; Heritage Linen Overshirt | Stratos Shopify Theme</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Stratos Theme Stylesheet -->
+  <link rel="stylesheet" href="./assets/application.css">
+
+  <style>
+    /* Developer Navigation & View Switcher Bar */
+    .dev-mode-bar {
+      background-color: #111111;
+      color: #E0DDD5;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      position: sticky;
+      top: 0;
+      z-index: 5000;
+      border-bottom: 1px solid #282828;
+    }
+
+    .dev-badge {
+      background: #2A2A2A;
+      color: #D9D2C7;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dev-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #48BB78;
+    }
+
+    .view-switcher-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: #1E1E1E;
+      padding: 0.25rem;
+      border-radius: 6px;
+      border: 1px solid #333;
+    }
+
+    .view-btn {
+      color: #A09D95;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .view-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .view-btn.is-active {
+      background-color: #333333;
+      color: #FFFFFF;
+    }
+
+    /* Column Customization Toolbar in Simulator */
+    .column-customizer-bar {
+      background-color: #F0EAE1;
+      border-bottom: 1px solid #E2DBD0;
+      padding: 0.4rem 1rem;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .column-tool-group {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .column-tool-btn {
+      padding: 0.2rem 0.55rem;
+      background: #FFFFFF;
+      border: 1px solid #D5CEBF;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .column-tool-btn:hover {
+      background: #E8E1D5;
+    }
+
+    .column-tool-btn.is-active {
+      background: #1A1A1A;
+      color: #FFF;
+      border-color: #1A1A1A;
+    }
+
+    /* Device frame simulator */
+    .device-sim-wrapper {
+      transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin 0.4s ease;
+      width: 100%;
+    }
+
+    .device-sim-wrapper.is-mobile-frame {
+      max-width: 410px;
+      margin: 1.5rem auto;
+      border: 10px solid #1E1E1E;
+      border-radius: 40px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 86vh;
+      min-height: 800px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      background-color: var(--color-bg-base);
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+    /* Code Inspector */
+    .code-inspector-view {
+      display: none;
+      padding: var(--spacing-xl) var(--spacing-sm);
+    }
+
+    .code-inspector-view.is-visible {
+      display: block;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .code-tab-btn {
+      padding: 0.5rem 1rem;
+      background: #E8E2D9;
+      border-radius: var(--radius-xs);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+
+    .code-tab-btn.is-active {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .code-box {
+      background-color: #18191B;
+      color: #E2E8F0;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      max-height: 650px;
+      border: 1px solid #2D3748;
+      position: relative;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #2D3748;
+      color: #FFF;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* Checkout Modal */
+    .checkout-modal-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: var(--shadow-modal);
+    }
+
+    .express-pay-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-block: 1rem;
+    }
+
+    .express-btn {
+      height: 2.85rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-shoppay {
+      background-color: #5A31F4;
+      color: #FFF;
+    }
+
+    .btn-applepay {
+      background-color: #000;
+      color: #FFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       DEVELOPER CONTROL & LIVE PREVIEW SWITCHER
+       ========================================================================= -->
+  <aside class="dev-mode-bar" aria-label="Theme Simulator Controls">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="dev-badge">Stratos Theme Engine 1.0</span>
+      <span style="color: #888;">Faberelin Reference Build</span>
+    </div>
+
+    <!-- Screen Navigation Switcher -->
+    <div class="view-switcher-group" role="tablist">
+      <button type="button" class="view-btn is-active" data-view-target="view-catalogue">Catalogue Grid (6)</button>
+      <button type="button" class="view-btn" data-view-target="view-product">Product Detail</button>
+      <button type="button" class="view-btn" data-view-target="view-discover">Discover / Story</button>
+      <button type="button" class="view-btn" data-view-target="view-code">Theme Inspector</button>
+    </div>
+
+    <!-- Responsive Viewport Toggle -->
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <span style="color: #777; font-size: 0.7rem;">VIEWPORT:</span>
+      <button type="button" id="ViewportDesktopBtn" class="dev-badge" style="cursor: pointer; background: #333; color: #FFF;">🖥 Desktop</button>
+      <button type="button" id="ViewportMobileBtn" class="dev-badge" style="cursor: pointer; background: #1E1E1E; color: #888;">📱 Mobile (375px)</button>
+    </div>
+  </aside>
+
+  <!-- Live Column Customization Toolbar -->
+  <div class="column-customizer-bar">
+    <div class="column-tool-group">
+      <strong>📐 LIVE COLUMN EDITOR:</strong>
+      <span style="color: #666; margin-left: 0.5rem;">Product Split:</span>
+      <button type="button" class="column-tool-btn is-active" data-product-split="split-standard">58/42 (Standard)</button>
+      <button type="button" class="column-tool-btn" data-product-split="split-equal">50/50 (Equal)</button>
+      <button type="button" class="column-tool-btn" data-product-split="split-wide-gallery">68/32 (Wide)</button>
+    </div>
+
+    <div class="column-tool-group">
+      <span style="color: #666;">Mobile Layout:</span>
+      <button type="button" class="column-tool-btn" id="ToolbarHorizontalAxisBtn" onclick="window.toggleHorizontalAxisMode()">↔ Horiz Axis</button>
+      <span style="color: #666; margin-left: 0.35rem;">Footer:</span>
+      <button type="button" class="column-tool-btn is-active" data-footer-cols="cols-4">4 Columns</button>
+      <button type="button" class="column-tool-btn" data-footer-cols="cols-3">3 Columns</button>
+    </div>
+  </div>
+
+  <div class="device-sim-wrapper" id="DeviceSimulatorWrapper">
+
+    <!-- =========================================================================
+         SITE HEADER (FABERELIN)
+         ========================================================================= -->
+    <header class="site-header" id="SiteHeader">
+      <div class="container">
+        <div class="header-inner">
+          <div class="header-left">
+            <button type="button" class="mobile-nav-toggle-btn" id="MobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="MobileNavDrawer">
+              <span class="hamburger-line line-1"></span>
+              <span class="hamburger-line line-2"></span>
+              <span class="hamburger-line line-3"></span>
+            </button>
+            <a href="javascript:void(0)" class="brand-logo" onclick="switchView('view-catalogue')">
+              <span>FABERELIN</span>
+            </a>
+            <nav class="nav-links">
+              <a href="javascript:void(0)" class="nav-link" id="NavDiscoverLink" onclick="switchView('view-discover')">DISCOVER</a>
+              <a href="javascript:void(0)" class="nav-link is-active" id="NavCatalogueLink" onclick="switchView('view-catalogue')">CATALOGUE</a>
+            </nav>
+          </div>
+
+          <div class="header-right">
+            <!-- Background-Blended Expandable Search Bar -->
+            <div class="header-search-wrapper" id="HeaderSearchWrapper">
+              <div class="header-search-bar" id="HeaderSearchBar">
+                <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  type="text"
+                  class="header-search-input"
+                  id="HeaderSearchInput"
+                  placeholder="Search catalogue..."
+                  aria-label="Search garments and collections"
+                  autocomplete="off"
+                />
+                <button type="button" class="header-search-clear" id="HeaderSearchClear" aria-label="Clear search">✕</button>
+              </div>
+
+              <!-- Instant Search Live Dropdown -->
+              <div class="header-search-dropdown" id="HeaderSearchDropdown" role="listbox">
+                <!-- Dynamically populated by SearchController -->
+              </div>
+            </div>
+
+            <!-- Bag Icon with Counter Badge -->
+            <button type="button" class="icon-btn" data-action="open-cart" aria-label="Shopping Bag">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span class="cart-count-badge" id="CartCountBadge">0</span>
+            </button>
+
+            <!-- User Account Profile (Client Portal) -->
+            <button type="button" class="icon-btn" aria-label="Customer Account / Client Portal" onclick="openAuthModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div class="mobile-nav-backdrop" id="MobileNavBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-nav-drawer" id="MobileNavDrawer" aria-label="Mobile Navigation Menu" aria-hidden="true">
+      <div class="mobile-nav-drawer-header">
+        <span class="mobile-nav-brand font-sans">FABERELIN</span>
+        <button type="button" class="mobile-nav-close-btn" id="MobileNavCloseBtn" aria-label="Close navigation menu">✕</button>
+      </div>
+
+      <div class="mobile-nav-drawer-body">
+        <nav class="mobile-nav-menu" role="navigation">
+          <a href="javascript:void(0)" class="mobile-nav-item is-active" id="MobileNavCatalogueLink" onclick="switchView('view-catalogue'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <span class="mobile-nav-item-num">01</span>
+            <span class="mobile-nav-item-text">CATALOGUE</span>
+            <span class="mobile-nav-item-badge">6 ITEMS</span>
+          </a>
+          <a href="javascript:void(0)" class="mobile-nav-item" id="MobileNavProductLink" onclick="switchView('view-product'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <span class="mobile-nav-item-num">02</span>
+            <span class="mobile-nav-item-text">PRODUCT DETAIL</span>
+          </a>
+          <a href="javascript:void(0)" class="mobile-nav-item" id="MobileNavDiscoverLink" onclick="switchView('view-discover'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <span class="mobile-nav-item-num">03</span>
+            <span class="mobile-nav-item-text">DISCOVER & HERITAGE</span>
+          </a>
+          <a href="javascript:void(0)" class="mobile-nav-item" id="MobileNavCodeLink" onclick="switchView('view-code'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <span class="mobile-nav-item-num">04</span>
+            <span class="mobile-nav-item-text">THEME INSPECTOR</span>
+          </a>
+          <a href="javascript:void(0)" class="mobile-nav-item mobile-nav-cart-item" data-action="open-cart" onclick="window.closeMobileNavDrawer && window.closeMobileNavDrawer(); window.openCart && window.openCart();">
+            <span class="mobile-nav-item-num">05</span>
+            <span class="mobile-nav-item-text">SHOPPING BAG / CART</span>
+            <span class="mobile-nav-item-badge cart-count-badge" id="MobileNavCartBadge">0</span>
+          </a>
+        </nav>
+
+        <div class="mobile-nav-divider"></div>
+
+        <div class="mobile-nav-utilities">
+          <button type="button" class="btn-primary" data-action="open-cart" onclick="window.closeMobileNavDrawer && window.closeMobileNavDrawer(); window.openCart && window.openCart();" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; height: 44px; margin-bottom: 0.25rem; font-size: 0.8rem; letter-spacing: 0.06em;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>VIEW CART & CHECKOUT</span>
+          </button>
+          <button type="button" class="mobile-nav-util-btn" onclick="openAuthModal(); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Client Portal / Sign In</span>
+          </button>
+          <button type="button" class="mobile-nav-util-btn" onclick="openSizeGuide(); window.closeMobileNavDrawer && window.closeMobileNavDrawer();">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16M4 12h16M4 18h7"></path>
+            </svg>
+            <span>Size & Measurement Guide</span>
+          </button>
+          <div class="mobile-nav-currency-row">
+            <span class="mobile-nav-currency-label">Store Currency</span>
+            <span class="mobile-nav-currency-badge">₹ INR (Indian Rupee)</span>
+          </div>
+
+          <!-- Support & Policies Subgroups -->
+          <div style="margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid #EAE3D9;">
+            <span style="font-size: 0.62rem; font-weight: 700; color: #7E3E25; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">SUPPORT</span>
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <a href="javascript:void(0)" onclick="openPolicyModal('contact'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();" class="footer-link" style="font-size: 0.75rem; color: #3D271D;">1. Contact Us</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('shipping'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();" class="footer-link" style="font-size: 0.75rem; color: #3D271D;">2. Shipping Policy</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('refund'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();" class="footer-link" style="font-size: 0.75rem; color: #3D271D;">3. Refund Policy</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('privacy'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();" class="footer-link" style="font-size: 0.75rem; color: #3D271D;">4. Privacy Policy</a>
+              <a href="javascript:void(0)" onclick="openPolicyModal('terms'); window.closeMobileNavDrawer && window.closeMobileNavDrawer();" class="footer-link" style="font-size: 0.75rem; color: #3D271D;">5. Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-nav-drawer-footer">
+        <p class="mobile-nav-tagline">Ethically crafted apparel. Designed for intentionality.</p>
+      </div>
+    </aside>
+
+    <main id="MainContent">
+      
+      <!-- =======================================================================
+           VIEW 0: FULL CATALOGUE COLLECTION GRID (EXCEL PRODUCTS & DUAL FILTERS)
+           ======================================================================= -->
+      <div id="ViewCatalogue" class="theme-view-pane">
+        <section class="collection-section">
+          <div class="container">
+            
+            <!-- Collection Hero -->
+            <div class="collection-hero">
+              <h1 class="collection-title font-sans">CATALOGUE</h1>
+              <p class="collection-subtitle">
+                Curated essentials across T-Shirts, Hoodies, and Sweatpants. Categorized by Casual, Polo, Oversized, and Essential fits in certified organic fabrics.
+              </p>
+            </div>
+
+            <!-- Dual Filter Bar & Column Density Controls -->
+            <div class="collection-filter-bar">
+              
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+                
+                <!-- Primary Type Filters -->
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+                  <div class="filter-pills-group" role="tablist" aria-label="Garment Type Categories">
+                    <button type="button" class="filter-pill is-active" data-filter-type="all">ALL GARMENTS (6)</button>
+                    <button type="button" class="filter-pill" data-filter-type="t-shirt">T-SHIRTS (3)</button>
+                    <button type="button" class="filter-pill" data-filter-type="hoodies">HOODIES (2)</button>
+                    <button type="button" class="filter-pill" data-filter-type="sweatpants">SWEATPANTS (1)</button>
+                  </div>
+
+                  <!-- Column Density & Sorting -->
+                  <div style="display: flex; align-items: center; gap: var(--spacing-sm); flex-wrap: wrap;">
+                    <div class="grid-col-switchers" aria-label="Grid Column Layout">
+                      <span style="font-size: 0.65rem; font-weight: 700; color: var(--color-text-subtle); padding-inline: 0.35rem;">LAYOUT:</span>
+                      <button type="button" class="grid-col-btn" data-grid-cols="2" title="2 Columns">2</button>
+                      <button type="button" class="grid-col-btn is-active" data-grid-cols="3" title="3 Columns">3</button>
+                      <button type="button" class="grid-col-btn" data-grid-cols="4" title="4 Columns">4</button>
+                      <button type="button" class="grid-col-btn" data-grid-cols="axis" title="Horizontal Axis Slider">↔ AXIS</button>
+                    </div>
+
+                    <div class="sort-select-wrapper">
+                      <label for="SortBy">Sort:</label>
+                      <select id="SortBy" class="sort-select">
+                        <option value="featured">Featured</option>
+                        <option value="price-ascending">Price: Low to High</option>
+                        <option value="price-descending">Price: High to Low</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Secondary Style / Category Filters -->
+                <div class="category-subfilters-group" role="tablist" aria-label="Style Fit Categories">
+                  <span style="font-size: 0.65rem; font-weight: 700; color: #7E3E25; text-transform: uppercase; white-space: nowrap;">STYLE FIT:</span>
+                  <button type="button" class="subfilter-pill is-active" data-filter-category="all">ALL STYLES</button>
+                  <button type="button" class="subfilter-pill" data-filter-category="casual">CASUAL (1)</button>
+                  <button type="button" class="subfilter-pill" data-filter-category="polo">POLO (1)</button>
+                  <button type="button" class="subfilter-pill" data-filter-category="oversized">OVERSIZED (2)</button>
+                  <button type="button" class="subfilter-pill" data-filter-category="essential">ESSENTIAL (2)</button>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="product-grid grid-cols-3" id="ProductGridContainer">
+              <!-- Dynamically populated by CollectionController from PRODUCTS_DATABASE -->
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- =======================================================================
+           VIEW 1: PRODUCT DETAIL PAGE (DYNAMIC PRODUCT SWITCHER & DETAILS)
+           ======================================================================= -->
+      <div id="ViewProduct" class="theme-view-pane" style="display: none;">
+        
+        <section class="product-section">
+          <div class="container">
+
+            <!-- Quick Product Switcher Toolbar -->
+            <div class="product-switcher-bar">
+              <span class="product-switcher-label">PREVIEW ITEM:</span>
+              <button type="button" class="product-switcher-btn is-active" data-product-handle="casual-t-shirt" onclick="selectCatalogueProduct('casual-t-shirt')">Casual T-Shirt (₹599)</button>
+              <button type="button" class="product-switcher-btn" data-product-handle="polo-t-shirt" onclick="selectCatalogueProduct('polo-t-shirt')">Polo T-Shirt (₹699)</button>
+              <button type="button" class="product-switcher-btn" data-product-handle="oversized-t-shirt" onclick="selectCatalogueProduct('oversized-t-shirt')">Oversized T-Shirt (₹999)</button>
+              <button type="button" class="product-switcher-btn" data-product-handle="essential-hoodie" onclick="selectCatalogueProduct('essential-hoodie')">Essential Hoodie (₹1,099)</button>
+              <button type="button" class="product-switcher-btn" data-product-handle="oversized-hoodie" onclick="selectCatalogueProduct('oversized-hoodie')">Oversized Hoodie (₹1,399)</button>
+              <button type="button" class="product-switcher-btn" data-product-handle="essential-sweatpants" onclick="selectCatalogueProduct('essential-sweatpants')">Essential Sweatpants (₹1,099)</button>
+            </div>
+
+            <div class="product-layout split-standard" id="LiveProductLayout">
+              
+              <!-- Left Column: Interactive Luxury Product Carousel (100% Contained, Zero Images Outside) -->
+              <div class="product-gallery" aria-label="Product Media Gallery">
+                <div class="product-carousel-wrapper">
+                  
+                  <!-- Main Carousel Stage Viewport -->
+                  <div class="product-carousel-viewport" id="ProductCarouselViewport">
+                    
+                    <!-- Internal Carousel Counter Badge -->
+                    <div class="carousel-counter-badge" id="ProductCarouselCounter">1 / 4</div>
+
+                    <!-- Carousel Nav Arrows -->
+                    <button type="button" class="carousel-nav-btn carousel-nav-prev" onclick="window.carouselPrev()" aria-label="Previous image">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                      </svg>
+                    </button>
+                    <button type="button" class="carousel-nav-btn carousel-nav-next" onclick="window.carouselNext()" aria-label="Next image">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+
+                    <!-- Carousel Track (All images strictly stored inside) -->
+                    <div class="product-carousel-track" id="ProductCarouselTrack">
+                      <div class="product-carousel-slide is-active" data-slide-index="0">
+                        <img
+                          src="assets/images/beige_casual_t-shirt_1.png"
+                          alt="Casual T-Shirt Front View"
+                          width="1200"
+                          height="1500"
+                          loading="eager"
+                        >
+                      </div>
+                      <div class="product-carousel-slide" data-slide-index="1">
+                        <img
+                          src="assets/images/beige_casual_t-shirt_2.png"
+                          alt="Casual T-Shirt Back View"
+                          width="1200"
+                          height="1500"
+                          loading="lazy"
+                        >
+                      </div>
+                      <div class="product-carousel-slide" data-slide-index="2">
+                        <img
+                          src="assets/images/beige_casual_t-shirt_3.png"
+                          alt="Casual T-Shirt Silhouette"
+                          width="1200"
+                          height="1500"
+                          loading="lazy"
+                        >
+                      </div>
+                      <div class="product-carousel-slide" data-slide-index="3">
+                        <img
+                          src="assets/images/beige_casual_t-shirt_4.png"
+                          alt="Casual T-Shirt Fabric Detail"
+                          width="1200"
+                          height="1500"
+                          loading="lazy"
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Internal Carousel Pagination Progress Dots -->
+                    <div class="product-carousel-dots" id="ProductCarouselDots" role="tablist" aria-label="Product Images">
+                      <button type="button" class="carousel-dot-btn is-active" onclick="window.carouselGoTo(0)" aria-label="View Image 1"></button>
+                      <button type="button" class="carousel-dot-btn" onclick="window.carouselGoTo(1)" aria-label="View Image 2"></button>
+                      <button type="button" class="carousel-dot-btn" onclick="window.carouselGoTo(2)" aria-label="View Image 3"></button>
+                      <button type="button" class="carousel-dot-btn" onclick="window.carouselGoTo(3)" aria-label="View Image 4"></button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Right Column: Sticky Purchase Module -->
+              <div class="product-info-column">
+                <div class="product-info-sticky">
+                  
+                  <!-- Category & Type Badge Pill -->
+                  <div class="product-badge-pill" id="ProductCategoryTag">T-SHIRT • CASUAL</div>
+
+                  <!-- Product Title -->
+                  <h1 class="product-title font-sans" id="ProductTitle">Casual T-Shirt</h1>
+
+                  <!-- Price -->
+                  <div class="product-price-wrapper">
+                    <span class="product-price font-sans" id="ProductPriceHeader">₹599</span>
+                  </div>
+
+                  <!-- Payment Installments Widget (UPI / Cards) -->
+                  <div class="product-installments-pill">
+                    <span>or 4 interest-free payments with</span>
+                    <span class="installments-badge badge-shoppay" style="background: #5F259F;">PhonePe</span>
+                    <span class="installments-badge badge-klarna" style="background: #0C2340; color: #FFF;">RuPay / Card</span>
+                  </div>
+
+                  <!-- Ethical & Quality Badges -->
+                  <div class="product-badges-row">
+                    <div class="badge-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                      <span>100% ORGANIC</span>
+                    </div>
+                    <div class="badge-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="8" r="7"/>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                      </svg>
+                      <span>PREMIUM FINISH</span>
+                    </div>
+                    <div class="badge-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="6" cy="6" r="3"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+                      </svg>
+                      <span>ETHICAL CRAFT</span>
+                    </div>
+                  </div>
+
+                  <!-- Product Description Summary -->
+                  <p class="product-description-deck" id="ProductDescriptionText">
+                    Meticulously crafted from 100% pre-shrunk organic long-staple cotton. Features reinforced double-needle seam construction and tailored rib necklines for effortless everyday comfort.
+                  </p>
+
+                  <!-- Color Swatches -->
+                  <div class="product-option-group">
+                    <div class="option-header">
+                      <span class="option-label">COLOR: <strong id="SelectedColorLabel">OFF WHITE</strong></span>
+                    </div>
+                    <div class="color-swatch-list" id="ProductSwatchesContainer" role="radiogroup" aria-label="Color Selection">
+                      <!-- Dynamically rendered by ProductDetailController -->
+                    </div>
+                  </div>
+
+                  <!-- Size Chips (XS to 2XL) -->
+                  <div class="product-option-group">
+                    <div class="option-header">
+                      <span class="option-label">SIZE: <strong id="SelectedSizeLabel">M</strong></span>
+                      <button type="button" class="size-guide-trigger" data-action="open-size-guide">Size Guide</button>
+                    </div>
+                    <div class="size-chip-list" id="ProductSizesContainer" role="radiogroup" aria-label="Size Selection">
+                      <!-- Dynamically rendered by ProductDetailController -->
+                    </div>
+                  </div>
+
+                  <!-- Quantity Selector & Main Add to Cart CTA with Merged Remover -->
+                  <div class="cta-wrapper">
+                    <div class="product-purchase-row" id="ProductPurchaseRow">
+                      <div class="product-quantity-selector" role="group" aria-label="Product quantity selection">
+                        <button type="button" class="qty-selector-btn" id="ProductQtyMinus" data-quantity-change="-1" aria-label="Decrease quantity">−</button>
+                        <input
+                          type="number"
+                          name="quantity"
+                          id="ProductQtyInput"
+                          class="qty-selector-input"
+                          value="1"
+                          min="1"
+                          max="99"
+                          aria-label="Product quantity"
+                        />
+                        <button type="button" class="qty-selector-btn" id="ProductQtyPlus" data-quantity-change="1" aria-label="Increase quantity">+</button>
+                      </div>
+                      <div class="product-cta-group">
+                        <button type="button" class="btn-primary product-add-btn" id="MainAddToCartBtn">
+                          <span id="MainAddToCartText">ADD TO CART</span>
+                          <span class="btn-price-divider" id="MainAddToCartDivider">•</span>
+                          <span class="btn-price-value" id="AddToCartPriceLabel">₹599</span>
+                        </button>
+                        <button type="button" class="btn-remove-from-cart" id="ProductRemoveFromCartBtn" title="Remove this item from bag" aria-label="Remove item from bag" style="display: none;">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          </svg>
+                          <span>REMOVE</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Shipping Notice Box -->
+                  <div class="shipping-notice-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <div class="shipping-notice-text">
+                      Free carbon-neutral shipping on orders over ₹1,499. Delivery across India in 3–5 business days.
+                    </div>
+                  </div>
+
+                  <!-- Guaranteed Payment Gateways & Secure Checkout -->
+                  <div class="product-payment-gateways">
+                    <div class="payment-gateways-header">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                      <span>GUARANTEED SAFE & ENCRYPTED CHECKOUT</span>
+                    </div>
+                    <div class="payment-icons-row">
+                      <span class="payment-badge-pill pill-upi" title="Unified Payments Interface">UPI</span>
+                      <span class="payment-badge-pill pill-gpay" title="Google Pay UPI">GPay</span>
+                      <span class="payment-badge-pill pill-phonepe" title="PhonePe UPI">PhonePe</span>
+                      <span class="payment-badge-pill pill-paytm" title="Paytm UPI">Paytm</span>
+                      <span class="payment-badge-pill pill-bhim" title="BHIM UPI">BHIM</span>
+                      <span class="payment-badge-pill pill-cred" title="CRED Pay">CRED</span>
+                      <span class="payment-badge-pill pill-rupay" title="RuPay Debit & Credit Cards">RuPay</span>
+                      <span class="payment-badge-pill pill-visa" title="Visa Cards">VISA</span>
+                      <span class="payment-badge-pill pill-mc" title="Mastercard">Mastercard</span>
+                      <span class="payment-badge-pill pill-amex" title="American Express">AMEX</span>
+                      <span class="payment-badge-pill pill-netbanking" title="Net Banking 50+ Indian Banks">Net Banking</span>
+                      <span class="payment-badge-pill pill-emi" title="No-Cost EMI on Credit Cards">Card EMI</span>
+                    </div>
+                  </div>
+
+                  <!-- Interactive Accordions -->
+                  <div class="product-accordion-group">
+                    
+                    <!-- 01. Description -->
+                    <div class="accordion-item is-open">
+                      <button type="button" class="accordion-trigger" aria-expanded="true">
+                        <span>DESCRIPTION</span>
+                        <span class="accordion-icon">+</span>
+                      </button>
+                      <div class="accordion-content" style="max-height: 250px;">
+                        <div class="accordion-body">
+                          <p id="ProductAccordionDescription">Meticulously tailored from premium organic fibers and heavy-knit fleeces. Features reinforced seam construction, organic color dyes, and tailored silhouettes designed for intentional layering across seasons.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 02. Fit & Sizing -->
+                    <div class="accordion-item">
+                      <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>FIT & SIZING</span>
+                        <span class="accordion-icon">+</span>
+                      </button>
+                      <div class="accordion-content">
+                        <div class="accordion-body" id="ProductFitBody">
+                          <p id="ProductFitText">Unisex oversized fit – relaxed all around with dropped shoulders for an easygoing look.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 03. Materials & Care -->
+                    <div class="accordion-item">
+                      <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>MATERIALS & CARE</span>
+                        <span class="accordion-icon">+</span>
+                      </button>
+                      <div class="accordion-content">
+                        <div class="accordion-body">
+                          <p id="ProductMaterialsText">100% cotton with 180 GSM for lightweight comfort.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 04. Shipping & Refund Policy -->
+                    <div class="accordion-item">
+                      <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>SHIPPING & REFUND POLICIES</span>
+                        <span class="accordion-icon">+</span>
+                      </button>
+                      <div class="accordion-content">
+                        <div class="accordion-body">
+                          <p><strong>Order Processing:</strong> 1–3 business days after confirmation.</p>
+                          <p><strong>Standard Delivery:</strong> 4–7 business days across India.</p>
+                          <p><strong>Returns & Refunds:</strong> Reported within 24 hours of delivery for damaged, defective, or incorrect items to <a href="mailto:indiacontact.faberelin@gmail.com" style="color: #7E3E25; font-weight: 600;">indiacontact.faberelin@gmail.com</a>.</p>
+                          <p><strong>Cancellations:</strong> Within 12 hours of placing the order before dispatch.</p>
+                          <div style="margin-top: 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <a href="javascript:void(0)" onclick="openPolicyModal('shipping')" class="footer-link" style="color: #7E3E25; font-weight: 700; font-size: 0.75rem;">Shipping Policy &rarr;</a>
+                            <a href="javascript:void(0)" onclick="openPolicyModal('refund')" class="footer-link" style="color: #7E3E25; font-weight: 700; font-size: 0.75rem;">Refund Policy &rarr;</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Horizontal Axis Collection Rail (Mobile & Desktop Touch Slider) -->
+        <section class="horizontal-axis-collection-section" aria-label="Explore Full Collection">
+          <div class="container">
+            <div class="horizontal-axis-header">
+              <div class="horizontal-axis-title-group">
+                <span class="horizontal-axis-eyebrow">FABERELIN COLLECTION</span>
+                <h3 class="horizontal-axis-title font-sans">Explore Other Garments (Horizontal Axis)</h3>
+              </div>
+              <div class="horizontal-axis-nav-arrows">
+                <button type="button" class="horizontal-axis-arrow-btn" onclick="window.scrollHorizontalAxis('prev')" aria-label="Scroll collection left">‹</button>
+                <button type="button" class="horizontal-axis-arrow-btn" onclick="window.scrollHorizontalAxis('next')" aria-label="Scroll collection right">›</button>
+              </div>
+            </div>
+
+            <div class="horizontal-axis-track" id="HorizontalAxisCollectionTrack">
+              <!-- Item 1 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('casual-t-shirt')">
+                <img class="horizontal-axis-thumb" src="assets/images/beige_casual_t-shirt_1.png" alt="Casual T-Shirt" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">T-SHIRT · CASUAL</span>
+                  <span class="horizontal-axis-item-name">Casual T-Shirt</span>
+                  <span class="horizontal-axis-item-price">₹599</span>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('polo-t-shirt')">
+                <img class="horizontal-axis-thumb" src="assets/images/black_polo_t-shirt_1.png" alt="Polo T-Shirt" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">T-SHIRT · POLO</span>
+                  <span class="horizontal-axis-item-name">Polo T-Shirt</span>
+                  <span class="horizontal-axis-item-price">₹699</span>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('oversized-t-shirt')">
+                <img class="horizontal-axis-thumb" src="assets/images/cooper_oversized_t-shirt_1.png" alt="Oversized T-Shirt" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">T-SHIRT · OVERSIZED</span>
+                  <span class="horizontal-axis-item-name">Oversized T-Shirt</span>
+                  <span class="horizontal-axis-item-price">₹999</span>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('essential-hoodie')">
+                <img class="horizontal-axis-thumb" src="assets/images/black_essential_hoodie_1.png" alt="Essential Hoodie" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">HOODIES · ESSENTIAL</span>
+                  <span class="horizontal-axis-item-name">Essential Hoodie</span>
+                  <span class="horizontal-axis-item-price">₹1,099</span>
+                </div>
+              </div>
+
+              <!-- Item 5 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('oversized-hoodie')">
+                <img class="horizontal-axis-thumb" src="assets/images/black_oversized_hoodie_1.png" alt="Oversized Hoodie" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">HOODIES · OVERSIZED</span>
+                  <span class="horizontal-axis-item-name">Oversized Hoodie</span>
+                  <span class="horizontal-axis-item-price">₹1,399</span>
+                </div>
+              </div>
+
+              <!-- Item 6 -->
+              <div class="horizontal-axis-item" onclick="selectCatalogueProduct('essential-sweatpants')">
+                <img class="horizontal-axis-thumb" src="assets/images/black_sweatpants_1.png" alt="Essential Sweatpants" loading="lazy">
+                <div class="horizontal-axis-item-info">
+                  <span class="horizontal-axis-item-tag">SWEATPANTS · ESSENTIAL</span>
+                  <span class="horizontal-axis-item-name">Essential Sweatpants</span>
+                  <span class="horizontal-axis-item-price">₹1,099</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Infinite 60fps Marquee Banner -->
+        <section class="marquee-section" aria-label="Brand Highlights">
+          <div class="marquee-track">
+            <span class="marquee-item">ETHICALLY CRAFTED APPAREL</span>
+            <span class="marquee-item">100% CERTIFIED ORGANIC COTTON & FLEECE</span>
+            <span class="marquee-item">FREE DELIVERY IN INDIA OVER ₹1,499</span>
+            <span class="marquee-item">PRECISE CATEGORIZATION & INCLUSIVE SIZING (XS–2XL)</span>
+            <span class="marquee-item">DESIGNED FOR INTENTIONALITY</span>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- =======================================================================
+           VIEW 2: DISCOVER / BRAND HERITAGE PAGE (FULL-BLEED TOP 1/2 VIDEO)
+           ======================================================================= -->
+      <div id="ViewDiscover" class="theme-view-pane" style="display: none;">
+        
+        <section class="editorial-hero">
+          <video
+            id="DiscoverVideo"
+            class="editorial-hero-video"
+            src="assets/videos/discover_video.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+          ></video>
+          <div class="editorial-hero-overlay"></div>
+
+          <div class="editorial-hero-content">
+            <button type="button" class="btn-primary-explore font-sans" onclick="switchView('view-catalogue')" aria-label="Explore Catalogue">
+              <span>EXPLORE CATALOGUE</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- Brand Mission & Story Segment -->
+        <section class="discover-story-segment">
+          <div class="container">
+            <div class="discover-story-card">
+              <span class="discover-story-eyebrow">ABOUT FABERELIN</span>
+              <h3 class="discover-story-heading font-sans">Everyday Comfort. Designed for India.</h3>
+              <p class="discover-story-text">
+                Welcome to FABERELIN, your new destination for everyday comfort! We believe that exceptionally comfortable clothing shouldn't break the bank. Designed specifically for India, our mission is to provide premium apparel that effortlessly moves with you. More than just a brand, FABERELIN is building a vibrant, inclusive community nationwide. Join us and experience true comfort!
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- =======================================================================
+           VIEW 3: THEME CODE & ARCHITECTURE INSPECTOR
+           ======================================================================= -->
+      <div id="ViewCode" class="theme-view-pane code-inspector-view">
+        <div class="container">
+          
+          <div style="margin-bottom: var(--spacing-md);">
+            <h2 class="font-sans" style="font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.25rem;">Theme Code & Architecture Inspector</h2>
+            <p style="font-size: var(--text-xs); color: var(--color-text-muted);">Inspect the underlying Shopify Liquid templates, CSS variable column system, and JavaScript controllers.</p>
+          </div>
+
+          <div class="code-tabs">
+            <button type="button" class="code-tab-btn is-active" data-code-file="css">application.css</button>
+            <button type="button" class="code-tab-btn" data-code-file="js">application.js</button>
+            <button type="button" class="code-tab-btn" data-code-file="login-liquid">main-login.liquid</button>
+            <button type="button" class="code-tab-btn" data-code-file="register-liquid">main-register.liquid</button>
+            <button type="button" class="code-tab-btn" data-code-file="product-liquid">main-product-standard.liquid</button>
+            <button type="button" class="code-tab-btn" data-code-file="lookbook-liquid">lookbook-story.liquid</button>
+            <button type="button" class="code-tab-btn" data-code-file="footer-liquid">footer.liquid</button>
+            <button type="button" class="code-tab-btn" data-code-file="schema-json">settings_schema.json</button>
+          </div>
+
+          <div class="code-box">
+            <button type="button" class="code-copy-btn" id="CodeCopyBtn">Copy Code</button>
+            <pre><code id="CodeInspectorContent">/* Loading source code... */</code></pre>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- =========================================================================
+         MOBILE FLOATING ADD TO CART BAR & QUICK CART
+         ========================================================================= -->
+    <div class="mobile-sticky-atc" id="MobileStickyATC">
+      <div class="mobile-atc-info">
+        <span class="mobile-atc-title" id="MobileATCTitle">Casual T-Shirt</span>
+        <span class="mobile-atc-price" id="MobileATCPrice">₹599</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button type="button" class="mobile-sticky-cart-icon-btn" data-action="open-cart" aria-label="Open Shopping Bag (Cart)" title="View Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count-badge" id="MobileStickyCartBadge">0</span>
+        </button>
+        <button type="button" class="btn-primary mobile-sticky-action-btn" id="MobileATCActionBtn" onclick="window.triggerProductAddToCart()">
+          <span id="MobileATCText">ADD TO CART</span>
+          <span class="btn-price-divider" id="MobileATCDivider">•</span>
+          <span class="btn-price-value" id="MobileATCPriceVal">₹599</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Floating Quick Cart Action (FAB) for Instant Cart Access -->
+    <button type="button" class="mobile-floating-cart-fab" id="MobileFloatingCartFAB" data-action="open-cart" aria-label="Open Shopping Cart" title="View Cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <span class="cart-count-badge" id="MobileFabCartBadge">0</span>
+    </button>
+
+    <!-- =========================================================================
+         SIZE GUIDE MODAL
+         ========================================================================= -->
+    <div class="modal-dialog" id="SizeGuideModal" role="dialog" aria-modal="true" aria-labelledby="SizeGuideHeading">
+      <div class="modal-backdrop" data-action="close-modal"></div>
+      <div class="modal-card">
+        <button type="button" class="modal-close-btn" data-action="close-modal" aria-label="Close modal">✕</button>
+        <h3 id="SizeGuideHeading" class="font-sans" style="font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--spacing-xs);">
+          Garment Measurement Guide
+        </h3>
+        <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">
+          Measurements are taken with the garment laid flat.
+        </p>
+
+        <div style="display: flex; gap: var(--spacing-2xs); margin-bottom: var(--spacing-sm);">
+          <button type="button" class="filter-pill is-active" data-unit-switch="in">INCHES</button>
+          <button type="button" class="filter-pill" data-unit-switch="cm">CENTIMETERS</button>
+        </div>
+
+        <div id="SizeGuideTableContainer">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest (Pit-to-Pit)</th>
+                <th>Length</th>
+                <th>Shoulder</th>
+                <th>Sleeve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>S</strong></td>
+                <td data-val-in="21.5&quot;" data-val-cm="54.6 cm">21.5"</td>
+                <td data-val-in="28.0&quot;" data-val-cm="71.1 cm">28.0"</td>
+                <td data-val-in="19.0&quot;" data-val-cm="48.3 cm">19.0"</td>
+                <td data-val-in="24.5&quot;" data-val-cm="62.2 cm">24.5"</td>
+              </tr>
+              <tr>
+                <td><strong>M</strong></td>
+                <td data-val-in="22.5&quot;" data-val-cm="57.2 cm">22.5"</td>
+                <td data-val-in="29.0&quot;" data-val-cm="73.7 cm">29.0"</td>
+                <td data-val-in="19.7&quot;" data-val-cm="50.0 cm">19.7"</td>
+                <td data-val-in="25.0&quot;" data-val-cm="63.5 cm">25.0"</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td data-val-in="23.5&quot;" data-val-cm="59.7 cm">23.5"</td>
+                <td data-val-in="30.0&quot;" data-val-cm="76.2 cm">30.0"</td>
+                <td data-val-in="20.5&quot;" data-val-cm="52.1 cm">20.5"</td>
+                <td data-val-in="25.5&quot;" data-val-cm="64.8 cm">25.5"</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td data-val-in="25.0&quot;" data-val-cm="63.5 cm">25.0"</td>
+                <td data-val-in="31.0&quot;" data-val-cm="78.7 cm">31.0"</td>
+                <td data-val-in="21.5&quot;" data-val-cm="54.6 cm">21.5"</td>
+                <td data-val-in="26.0&quot;" data-val-cm="66.0 cm">26.0"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         IMAGE LIGHTBOX MODAL
+         ========================================================================= -->
+    <div class="modal-dialog" id="GalleryLightboxModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-action="close-modal"></div>
+      <div style="position: relative; max-width: 90vw; max-height: 90vh;">
+        <button type="button" class="modal-close-btn" data-action="close-modal" style="color: white; top: -35px; right: 0;">✕</button>
+        <img id="LightboxTargetImage" src="" alt="High resolution detail zoom" style="max-height: 85vh; width: auto; border-radius: var(--radius-sm);">
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         GLOBAL CART DRAWER COMPONENT
+         ========================================================================= -->
+    <div class="cart-drawer-overlay" id="CartOverlay" data-action="close-cart"></div>
+    <div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+      
+      <!-- Drawer Header -->
+      <div class="cart-drawer-header">
+        <h3 class="cart-drawer-title font-sans" id="CartDrawerTitle">YOUR BAG</h3>
+        <button type="button" class="icon-btn cart-close-btn" data-action="close-cart" aria-label="Close cart drawer">✕</button>
+      </div>
+
+      <!-- Free Shipping Progress Meter (₹1,499 target) -->
+      <div class="shipping-meter-box" id="ShippingMeterBox">
+        <div class="shipping-meter-msg" id="ShippingMeterMsg">
+          Add <strong>₹1,499</strong> more to unlock <strong>Free Carbon-Neutral Shipping</strong>
+        </div>
+        <div class="shipping-meter-bar">
+          <div class="shipping-meter-fill" id="ShippingMeterFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Cart Drawer Body -->
+      <div class="cart-drawer-body" id="CartDrawerBody"></div>
+
+      <!-- Cart Drawer Footer -->
+      <div class="cart-drawer-footer">
+        
+        <div class="cart-promo-row">
+          <input type="text" id="CartPromoInput" class="cart-promo-input" placeholder="Promo code (e.g. STRATOS10)" aria-label="Promo code">
+          <button type="button" id="CartPromoBtn" class="cart-promo-btn">APPLY</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: var(--spacing-2xs); margin-bottom: var(--spacing-sm); font-size: var(--text-xs); color: var(--color-text-muted);">
+          <input type="checkbox" id="CarbonOffsetCheck" checked style="accent-color: var(--color-primary);">
+          <label for="CarbonOffsetCheck">Include ₹125 Carbon-Neutral Offset (Included)</label>
+        </div>
+
+        <div class="cart-subtotal-row">
+          <span class="cart-subtotal-label">SUBTOTAL</span>
+          <span class="cart-subtotal-amount" id="CartSubtotalAmount">₹0</span>
+        </div>
+
+        <button type="button" class="cart-checkout-btn" onclick="openCheckoutModal()">
+          <span>PROCEED TO CHECKOUT</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <p style="text-align: center; font-size: 0.68rem; color: var(--color-text-subtle); margin-top: var(--spacing-2xs);">
+          Free 30-day carbon-neutral returns on all orders across India
+        </p>
+      </div>
+
+    </div>
+
+    <!-- =========================================================================
+         CUSTOMER AUTHENTICATION MODAL (SIGN IN & REGISTER)
+         ========================================================================= -->
+    <div class="modal-dialog" id="AuthModal" role="dialog" aria-modal="true" aria-labelledby="AuthModalTitle">
+      <div class="modal-backdrop" data-action="close-modal"></div>
+      <div class="checkout-modal-card" style="max-width: 520px; width: 100%;">
+        <button type="button" class="modal-close-btn" data-action="close-modal" aria-label="Close authentication modal">✕</button>
+        
+        <!-- Auth Tab Nav -->
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 0.75rem;">
+          <button type="button" class="auth-tab-btn is-active" id="TabSignInBtn" onclick="switchAuthTab('signin')" style="flex: 1; text-align: center;">SIGN IN</button>
+          <button type="button" class="auth-tab-btn" id="TabRegisterBtn" onclick="switchAuthTab('register')" style="flex: 1; text-align: center;">CREATE ACCOUNT</button>
+        </div>
+
+        <!-- 01. Sign In Tab Pane -->
+        <div id="AuthSignInPane">
+          <div class="auth-header" style="margin-bottom: 1rem;">
+            <span class="auth-eyebrow">CLIENT PORTAL</span>
+            <h3 id="AuthModalTitle" class="auth-title font-sans" style="font-size: 1.4rem;">Sign In to Your Account</h3>
+            <p class="auth-deck">Access your order history, carbon offset certificates, and saved preferences.</p>
+          </div>
+
+          <form id="ModalLoginForm" onsubmit="event.preventDefault(); handleModalAuthSubmit('login');" class="auth-form">
+            <div class="auth-field">
+              <label for="ModalLoginEmail" class="auth-label">EMAIL ADDRESS</label>
+              <input type="email" id="ModalLoginEmail" class="auth-input" placeholder="name@domain.com" required value="client@faberelin.com">
+            </div>
+            <div class="auth-field">
+              <div class="auth-field-header">
+                <label for="ModalLoginPassword" class="auth-label">PASSWORD</label>
+                <a href="javascript:void(0)" class="auth-link-forgot" onclick="toggleRecoverPassword(true)">Forgot Password?</a>
+              </div>
+              <input type="password" id="ModalLoginPassword" class="auth-input" placeholder="••••••••" required value="faberelin2024">
+            </div>
+            <div class="auth-actions" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn-primary auth-submit-btn">SIGN IN</button>
+            </div>
+          </form>
+
+          <!-- Recover Password Inline Pane -->
+          <div id="ModalRecoverPane" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border-subtle);">
+            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem;">Reset Your Password</h4>
+            <p style="font-size: 0.72rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">Enter your email to receive a password reset link:</p>
+            <form onsubmit="event.preventDefault(); handleModalAuthSubmit('recover');" class="auth-form">
+              <div class="auth-field">
+                <input type="email" id="ModalRecoverEmail" class="auth-input" placeholder="name@domain.com" required value="client@faberelin.com">
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <button type="submit" class="btn-primary" style="flex: 1; height: 2.75rem;">SEND LINK</button>
+                <button type="button" class="auth-cancel-btn" onclick="toggleRecoverPassword(false)" style="flex: 1; height: 2.75rem;">CANCEL</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 02. Register Tab Pane -->
+        <div id="AuthRegisterPane" style="display: none;">
+          <div class="auth-header" style="margin-bottom: 1rem;">
+            <span class="auth-eyebrow">MEMBERSHIP</span>
+            <h3 class="auth-title font-sans" style="font-size: 1.4rem;">Create Your Account</h3>
+            <p class="auth-deck">Join the Faberelin circle for early access to limited textile drops and seamless checkout.</p>
+          </div>
+
+          <form id="ModalRegisterForm" onsubmit="event.preventDefault(); handleModalAuthSubmit('register');" class="auth-form">
+            <div class="auth-row-dual">
+              <div class="auth-field">
+                <label for="ModalRegFirst" class="auth-label">FIRST NAME</label>
+                <input type="text" id="ModalRegFirst" class="auth-input" placeholder="First Name" required value="Elena">
+              </div>
+              <div class="auth-field">
+                <label for="ModalRegLast" class="auth-label">LAST NAME</label>
+                <input type="text" id="ModalRegLast" class="auth-input" placeholder="Last Name" required value="Rostova">
+              </div>
+            </div>
+            <div class="auth-field">
+              <label for="ModalRegEmail" class="auth-label">EMAIL ADDRESS</label>
+              <input type="email" id="ModalRegEmail" class="auth-input" placeholder="name@domain.com" required value="elena.rostova@atelier.com">
+            </div>
+            <div class="auth-field">
+              <label for="ModalRegPassword" class="auth-label">PASSWORD</label>
+              <input type="password" id="ModalRegPassword" class="auth-input" placeholder="At least 8 characters" required minlength="8" value="heritageflax2024">
+            </div>
+            <div class="auth-checkbox-field">
+              <input type="checkbox" id="ModalRegMarketing" class="auth-checkbox" checked>
+              <label for="ModalRegMarketing" class="auth-checkbox-label">
+                Subscribe to receive private preview access, lookbooks, and atelier journals.
+              </label>
+            </div>
+            <div class="auth-actions" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn-primary auth-submit-btn">CREATE ACCOUNT</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         CHECKOUT SIMULATOR MODAL (INR INDIAN RUPEES & GATEWAYS)
+         ========================================================================= -->
+    <div class="modal-dialog" id="CheckoutModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-action="close-modal"></div>
+      <div class="checkout-modal-card">
+        <button type="button" class="modal-close-btn" data-action="close-modal" aria-label="Close checkout modal">✕</button>
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <span class="brand-logo">FABERELIN</span>
+          <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">Express Carbon-Neutral Checkout • All India Delivery</p>
+        </div>
+
+        <!-- Express One-Click Payment Gateways (UPI & Cards) -->
+        <div style="font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #7A5C4D; margin-bottom: 0.4rem; text-align: center;">
+          ⚡ INSTANT UPI & EXPRESS CHECKOUT
+        </div>
+        <div class="express-pay-grid" style="grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+          <button type="button" class="express-btn" style="background: #5F259F; color: #FFF;" onclick="simulateOrderSuccess('PhonePe UPI')">PhonePe</button>
+          <button type="button" class="express-btn" style="background: #FFF; color: #3C4043; border: 1.5px solid #D8CFC4;" onclick="simulateOrderSuccess('Google Pay UPI')">GPay UPI</button>
+          <button type="button" class="express-btn" style="background: #00BAF2; color: #FFF;" onclick="simulateOrderSuccess('Paytm UPI')">Paytm UPI</button>
+          <button type="button" class="express-btn" style="background: #0C2340; color: #FFF;" onclick="simulateOrderSuccess('RuPay / Card Express')">RuPay / Card</button>
+        </div>
+
+        <div style="display: flex; align-items: center; margin-block: 1rem; color: #888; font-size: 0.7rem;">
+          <div style="flex: 1; height: 1px; background: #E5E0D8;"></div>
+          <span style="padding-inline: 0.5rem; text-transform: uppercase;">OR CHOOSE PAYMENT METHOD</span>
+          <div style="flex: 1; height: 1px; background: #E5E0D8;"></div>
+        </div>
+
+        <!-- Payment Gateway Method Selector -->
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+          <!-- 01. UPI / QR -->
+          <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; border: 1.5px solid #9E583B; background: #FAF7F2; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 700; color: #3D271D;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="payment_gateway_choice" value="upi" checked style="accent-color: #7E3E25;">
+              <span>UPI / QR (Google Pay, PhonePe, Paytm, CRED, BHIM)</span>
+            </div>
+            <span class="payment-badge-pill pill-upi" style="padding: 0.1rem 0.4rem; font-size: 0.58rem;">UPI FAST</span>
+          </label>
+
+          <!-- 02. Credit / Debit Cards -->
+          <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; border: 1px solid #E2DACF; background: #FFFFFF; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; color: #4A3B32;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="payment_gateway_choice" value="cards" style="accent-color: #7E3E25;">
+              <span>Credit / Debit Card (RuPay, Visa, Mastercard, AMEX)</span>
+            </div>
+            <div style="display: flex; gap: 0.2rem;">
+              <span class="payment-badge-pill" style="padding: 0.1rem 0.3rem; font-size: 0.52rem;">RuPay</span>
+              <span class="payment-badge-pill" style="padding: 0.1rem 0.3rem; font-size: 0.52rem;">VISA</span>
+              <span class="payment-badge-pill" style="padding: 0.1rem 0.3rem; font-size: 0.52rem;">MC</span>
+            </div>
+          </label>
+
+          <!-- 03. Net Banking -->
+          <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; border: 1px solid #E2DACF; background: #FFFFFF; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; color: #4A3B32;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="payment_gateway_choice" value="netbanking" style="accent-color: #7E3E25;">
+              <span>Net Banking (SBI, HDFC, ICICI, Axis & 50+ Banks)</span>
+            </div>
+            <span class="payment-badge-pill" style="padding: 0.1rem 0.4rem; font-size: 0.58rem;">50+ BANKS</span>
+          </label>
+
+          <!-- 04. No-Cost Card EMI -->
+          <label style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; border: 1px solid #E2DACF; background: #FFFFFF; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; color: #4A3B32;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="payment_gateway_choice" value="emi" style="accent-color: #7E3E25;">
+              <span>No-Cost EMI on Cards (from ₹299/mo)</span>
+            </div>
+            <span class="installments-badge badge-shoppay" style="background: #7E3E25;">NO-COST EMI</span>
+          </label>
+        </div>
+
+        <form onsubmit="event.preventDefault(); simulateOrderSuccess('Selected Indian Payment Gateway');" style="display: flex; flex-direction: column; gap: 0.65rem;">
+          <input type="text" placeholder="Enter UPI ID (e.g. mobile@upi / username@okhdfcbank)" class="newsletter-input" style="border: 1px solid var(--color-border); border-radius: 4px;" value="atelier.client@okhdfcbank">
+          <input type="email" placeholder="Email Address for receipt" required class="newsletter-input" style="border: 1px solid var(--color-border); border-radius: 4px;" value="client@faberelin.com">
+          <input type="text" placeholder="Delivery Address (Pincode, City, State)" required class="newsletter-input" style="border: 1px solid var(--color-border); border-radius: 4px;" value="B-402 Luxury Residences, Bandra West, Mumbai 400050">
+          <button type="submit" class="btn-primary" style="margin-top: 0.5rem;" id="CheckoutPayBtn">VERIFY & PAY SECURELY</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SUPPORT & LEGAL POLICIES MODAL (5 SUBGROUPS)
+         ========================================================================= -->
+    <div class="modal-dialog policy-modal-dialog" id="PolicyModal" role="dialog" aria-modal="true" aria-labelledby="PolicyModalTitle">
+      <div class="modal-backdrop" onclick="closePolicyModal()"></div>
+      <div class="modal-card policy-modal-card">
+        
+        <!-- Modal Header with Tabs -->
+        <div class="policy-modal-header">
+          <div class="policy-modal-title-group">
+            <span class="policy-modal-eyebrow">FABERELIN ATELIER</span>
+            <h3 class="policy-modal-title font-sans" id="PolicyModalTitle">Support & Policies</h3>
+          </div>
+          <button type="button" class="modal-close-btn" onclick="closePolicyModal()" aria-label="Close policy viewer">✕</button>
+        </div>
+
+        <!-- 5 Subgroup Tab Navigation -->
+        <div class="policy-tabs-nav" role="tablist" aria-label="Support Subgroups">
+          <button type="button" class="policy-tab-btn is-active" id="PolicyTabBtn-contact" onclick="switchPolicyTab('contact')" role="tab" aria-selected="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>1. Contact Us</span>
+          </button>
+          <button type="button" class="policy-tab-btn" id="PolicyTabBtn-shipping" onclick="switchPolicyTab('shipping')" role="tab" aria-selected="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span>2. Shipping Policy</span>
+          </button>
+          <button type="button" class="policy-tab-btn" id="PolicyTabBtn-refund" onclick="switchPolicyTab('refund')" role="tab" aria-selected="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            <span>3. Refund Policy</span>
+          </button>
+          <button type="button" class="policy-tab-btn" id="PolicyTabBtn-privacy" onclick="switchPolicyTab('privacy')" role="tab" aria-selected="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>4. Privacy Policy</span>
+          </button>
+          <button type="button" class="policy-tab-btn" id="PolicyTabBtn-terms" onclick="switchPolicyTab('terms')" role="tab" aria-selected="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>5. Terms of Service</span>
+          </button>
+        </div>
+
+        <!-- Tab Body Panes -->
+        <div class="policy-modal-body">
+          
+          <!-- 01. Contact Us Pane -->
+          <div class="policy-tab-pane is-active" id="PolicyPane-contact" role="tabpanel">
+            
+<div class="contact-us-pane">
+  <div class="contact-header-card">
+    <div class="contact-eyebrow">FABERELIN CLIENT CARE</div>
+    <h3 class="contact-title font-sans">We're Here to Assist You</h3>
+    <p class="contact-desc">
+      Have a question regarding your order, sizing, bespoke requests, or need assistance with shipping & returns? Our concierge team is available to assist you.
+    </p>
+  </div>
+
+  <div class="contact-grid-layout">
+    <div class="contact-info-card">
+      <h4 class="contact-card-title">Official Inquiries & Support</h4>
+      
+      <div class="contact-info-row">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div>
+          <span class="contact-label">Primary Support Email</span>
+          <a href="mailto:indiacontact.faberelin@gmail.com" class="contact-val">indiacontact.faberelin@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-info-row">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div>
+          <span class="contact-label">Administrative Email</span>
+          <a href="mailto:adityarajkumar245@gmail.com" class="contact-val">adityarajkumar245@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-info-row">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div>
+          <span class="contact-label">Atelier Location</span>
+          <span class="contact-val">Bangalore, Karnataka, India</span>
+        </div>
+      </div>
+
+      <div class="contact-info-row">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </div>
+        <div>
+          <span class="contact-label">GST Identification Number</span>
+          <span class="contact-val" style="font-family: monospace; font-weight: 700; letter-spacing: 0.05em;">29FGLPA2616E1ZL</span>
+        </div>
+      </div>
+
+      <div class="contact-info-row">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div>
+          <span class="contact-label">Response Time</span>
+          <span class="contact-val">Within 24 Hours (Mon – Sat, 10:00 AM – 7:00 PM IST)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Contact Form -->
+    <div class="contact-form-card">
+      <h4 class="contact-card-title">Send a Direct Message</h4>
+      <form class="contact-form" onsubmit="event.preventDefault(); window.handleContactSubmit(this);">
+        <div class="contact-form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="ContactName">Full Name *</label>
+            <input type="text" id="ContactName" required class="form-input" placeholder="Your Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ContactEmail">Email Address *</label>
+            <input type="email" id="ContactEmail" required class="form-input" placeholder="your@email.com">
+          </div>
+        </div>
+
+        <div class="contact-form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="ContactOrderId">Order ID (Optional)</label>
+            <input type="text" id="ContactOrderId" class="form-input" placeholder="#FBR-8924">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ContactSubject">Inquiry Type</label>
+            <select id="ContactSubject" class="form-input">
+              <option value="Order Status / Shipping">Order Status & Shipping</option>
+              <option value="Return / Refund Request">Return / Refund Request (within 24h)</option>
+              <option value="Sizing / Fit Assistance">Sizing & Fit Assistance</option>
+              <option value="Payment / Billing Issue">Payment / Billing Issue</option>
+              <option value="General Inquiry">General / Atelier Inquiries</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ContactMessage">Message *</label>
+          <textarea id="ContactMessage" rows="4" required class="form-input" placeholder="How can we assist you with your Faberelin experience?"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="height: 44px; margin-top: 0.25rem;">
+          <span>SEND INQUIRY</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+          </div>
+
+                              <!-- 02. Shipping Policy Pane -->
+          <div class="policy-tab-pane" id="PolicyPane-shipping" role="tabpanel" style="display: none;">
+            <div class="policy-content-article">
+              <div class="exact-policy-doc">
+                <h3 class="exact-doc-title font-sans">Shipping policy</h3>
+                
+                <p class="exact-paragraph">At Faberelin, every order is handled with care to ensure a smooth and reliable delivery experience. Please review our shipping policy below to understand how and when your order will be delivered.</p>
+
+                <h4 class="exact-section-heading">Order Processing</h4>
+                <p class="exact-paragraph">All orders are processed within 1–3 business days after confirmation.</p>
+                <p class="exact-paragraph">Orders placed on Sundays or public holidays will be processed on the next working day.</p>
+                <p class="exact-paragraph">During product launches, sales, or limited drops, processing times may be slightly longer due to high order volumes.</p>
+                <p class="exact-paragraph">Once your order is shipped, you will receive a shipping confirmation message/email with tracking details.</p>
+
+                <h4 class="exact-section-heading">Shipping Timelines</h4>
+                <p class="exact-paragraph"><strong>Standard Delivery:</strong> 4–7 business days after dispatch</p>
+                <p class="exact-paragraph">Delivery timelines may vary depending on your location, courier service, and local conditions.</p>
+                <p class="exact-paragraph">Please note that delivery delays may occur due to factors beyond our control such as weather conditions, courier delays, or regional restrictions.</p>
+
+                <h4 class="exact-section-heading">Shipping Charges</h4>
+                <p class="exact-paragraph">Shipping charges (if applicable) are calculated and displayed at checkout.</p>
+                <p class="exact-paragraph">Any additional charges such as COD fees will be clearly mentioned before order confirmation.</p>
+
+                <h4 class="exact-section-heading">Cash on Delivery (COD)</h4>
+                <p class="exact-paragraph">COD is available for selected pin codes.</p>
+                <p class="exact-paragraph">We reserve the right to limit or disable COD for orders that are repeatedly refused or returned without a valid reason.</p>
+                <p class="exact-paragraph">Customers are advised to ensure availability at the delivery address to avoid failed deliveries.</p>
+
+                <h4 class="exact-section-heading">Incorrect Address or Failed Delivery</h4>
+                <p class="exact-paragraph">Please ensure that your shipping address and contact details are accurate at checkout.</p>
+                <p class="exact-paragraph">Orders returned due to incorrect address, unreachable customer, or refusal to accept delivery will not be eligible for refunds.</p>
+                <p class="exact-paragraph">Re-shipping such orders may require additional charges.</p>
+
+                <h4 class="exact-section-heading">Damaged or Missing Packages</h4>
+                <p class="exact-paragraph">If your package arrives damaged, tampered, or incomplete, please inform us within 24 hours of delivery.</p>
+                <p class="exact-paragraph">Clear images or videos of the package and product must be shared with our support team for verification.</p>
+                <p class="exact-paragraph">mail id:- <a href="mailto:indiacontact.faberelin@gmail.com" class="policy-email-link">indiacontact.faberelin@gmail.com</a></p>
+
+                <h4 class="exact-section-heading">International Shipping</h4>
+                <p class="exact-paragraph">Currently, Faberelin ships only within India.</p>
+                <p class="exact-paragraph">International shipping options may be introduced in the future.</p>
+
+                <h4 class="exact-section-heading">Important Note</h4>
+                <p class="exact-paragraph">Faberelin operates on a limited-drop and made-to-order model. Each product is prepared carefully to maintain quality and exclusivity. By placing an order, you agree to the shipping terms mentioned above.</p>
+              </div>
+            </div>
+          </div>
+
+                    <!-- 03. Refund Policy Pane -->
+          <div class="policy-tab-pane" id="PolicyPane-refund" role="tabpanel" style="display: none;">
+            <div class="policy-content-article">
+              <div class="exact-policy-doc">
+                <h3 class="exact-doc-title font-sans">Refund policy</h3>
+                
+                <p class="exact-paragraph">At Faberelin, we take pride in delivering high-quality products crafted with care. Please read our return and refund policy carefully before making a purchase.</p>
+
+                <h4 class="exact-section-heading">Returns</h4>
+                <p class="exact-paragraph">We accept returns only in the following cases:</p>
+                <p class="exact-paragraph">The product received is damaged</p>
+                <p class="exact-paragraph">The product received is defective</p>
+                <p class="exact-paragraph">The product received is incorrect (wrong item/size)</p>
+
+                <p class="exact-paragraph"><strong>To be eligible for a return:</strong></p>
+                <p class="exact-paragraph">The issue must be reported within 24 hours of delivery</p>
+                <p class="exact-paragraph">The product must be unused, unworn, unwashed, and in its original condition</p>
+                <p class="exact-paragraph">Original packaging, tags, and invoice must be intact</p>
+
+                <p class="exact-paragraph">To initiate a return, please contact us at: <a href="mailto:indiacontact.faberelin@gmail.com" class="policy-email-link">indiacontact.faberelin@gmail.com</a></p>
+                <p class="exact-paragraph">Include your order ID and clear images/videos of the issue.</p>
+
+                <h4 class="exact-section-heading">Non-Returnable Items</h4>
+                <p class="exact-paragraph">The following items are not eligible for return or exchange:</p>
+                <p class="exact-paragraph">Items returned due to size, fit, color preference, or change of mind</p>
+                <p class="exact-paragraph">Products showing signs of use, washing, or damage after delivery</p>
+                <p class="exact-paragraph">As our products are made-to-order / limited drops, we strongly recommend checking the size chart before placing an order.</p>
+
+                <h4 class="exact-section-heading">Refunds</h4>
+                <p class="exact-paragraph">Once your return request is approved and the product passes inspection, a refund or replacement will be processed.</p>
+                <p class="exact-paragraph">Refunds are issued to the original payment method used at checkout.</p>
+                <p class="exact-paragraph">The refund will be processed within 5–7 business days after approval.</p>
+                <p class="exact-paragraph">Shipping charges (if any) are non-refundable.</p>
+
+                <h4 class="exact-section-heading">Cancellations</h4>
+                <p class="exact-paragraph">Orders can be cancelled within 12 hours of placing the order, provided they have not been processed or shipped.</p>
+                <p class="exact-paragraph">Once an order is shipped, it cannot be cancelled.</p>
+                <p class="exact-paragraph">Orders can be cancelled within 12 hours of placing the order, provided they have not been processed or shipped.</p>
+                <p class="exact-paragraph">Once an order is shipped, it cannot be cancelled.</p>
+
+                <h4 class="exact-section-heading">Cash on Delivery (COD) Orders</h4>
+                <p class="exact-paragraph">COD orders that are refused or returned without a valid reason may be restricted from future COD purchases.</p>
+                <p class="exact-paragraph">We reserve the right to disable COD for customers with repeated failed deliveries.</p>
+
+                <h4 class="exact-section-heading">Contact Us</h4>
+                <p class="exact-paragraph">For any questions regarding returns, refunds, or order issues, feel free to reach out to us: <a href="mailto:indiacontact.faberelin@gmail.com" class="policy-email-link">indiacontact.faberelin@gmail.com</a></p>
+
+                <h4 class="exact-section-heading">Final Note</h4>
+                <p class="exact-paragraph">Faberelin operates on a limited-drop and quality-first model. Each order is carefully processed to ensure the best experience for our customers. By placing an order, you agree to the terms outlined above.</p>
+              </div>
+            </div>
+          </div>
+
+                    <!-- 04. Privacy Policy Pane -->
+          <div class="policy-tab-pane" id="PolicyPane-privacy" role="tabpanel" style="display: none;">
+            <div class="policy-content-article">
+              <div class="exact-policy-doc">
+                <h3 class="exact-doc-title font-sans">Privacy policy</h3>
+                <div class="exact-last-updated">Last updated: July 29, 2026</div>
+
+                <p class="exact-paragraph">FABERELIN operates this store and website, including all related information, content, features, tools, products and services, in order to provide you, the customer, with a curated shopping experience (the "Services"). FABERELIN is powered by Shopify, which enables us to provide the Services to you. This Privacy Policy describes how we collect, use, and disclose your personal information when you visit, use, or make a purchase or other transaction using the Services or otherwise communicate with us. If there is a conflict between our Terms of Service and this Privacy Policy, this Privacy Policy controls with respect to the collection, processing, and disclosure of your personal information.</p>
+
+                <p class="exact-paragraph">Please read this Privacy Policy carefully. By using and accessing any of the Services, you acknowledge that you have read this Privacy Policy and understand the collection, use, and disclosure of your information as described in this Privacy Policy.</p>
+
+                <h4 class="exact-section-heading">Personal Information We Collect or Process</h4>
+                <p class="exact-paragraph">When we use the term "personal information," we are referring to information that identifies or can reasonably be linked to you or another person. Personal information does not include information that is collected anonymously or that has been de-identified, so that it cannot identify or be reasonably linked to you. We may collect or process the following categories of personal information, including inferences drawn from this personal information, depending on how you interact with the Services, where you live, and as permitted or required by applicable law:</p>
+
+                <p class="exact-paragraph"><strong>Contact details</strong> including your name, address, billing address, shipping address, phone number, and email address.</p>
+                <p class="exact-paragraph"><strong>Financial information</strong> including credit card, debit card, and financial account numbers, payment card information, financial account information, transaction details, form of payment, payment confirmation and other payment details.</p>
+                <p class="exact-paragraph"><strong>Account information</strong> including your username, password, security questions, preferences and settings.</p>
+                <p class="exact-paragraph"><strong>Transaction information</strong> including the items you view, put in your cart, add to your wishlist, or purchase, return, exchange or cancel and your past transactions.</p>
+                <p class="exact-paragraph"><strong>Communications with us</strong> including the information you include in communications with us, for example, when sending a customer support inquiry.</p>
+                <p class="exact-paragraph"><strong>Device information</strong> including information about your device, browser, or network connection, your IP address, and other unique identifiers.</p>
+                <p class="exact-paragraph"><strong>Usage information</strong> including information regarding your interaction with the Services, including how and when you interact with or navigate the Services.</p>
+
+                <h4 class="exact-section-heading">Personal Information Sources</h4>
+                <p class="exact-paragraph">We may collect personal information from the following sources:</p>
+                <p class="exact-paragraph"><strong>Directly from you</strong> including when you create an account, visit or use the Services, communicate with us, or otherwise provide us with your personal information;</p>
+                <p class="exact-paragraph"><strong>Automatically through the Services</strong> including from your device when you use our products or services or visit our websites, and through the use of cookies and similar technologies;</p>
+                <p class="exact-paragraph"><strong>From our service providers</strong> including when we engage them to enable certain technology and when they collect or process your personal information on our behalf;</p>
+                <p class="exact-paragraph"><strong>From our partners or other third parties.</strong></p>
+
+                <h4 class="exact-section-heading">How We Use Your Personal Information</h4>
+                <p class="exact-paragraph">Depending on how you interact with us or which of the Services you use, we may use personal information for the following purposes:</p>
+                <p class="exact-paragraph"><strong>Provide, Tailor, and Improve the Services.</strong> We use your personal information to provide you with the Services, including to perform our contract with you, to process your payments, to fulfill your orders, to remember your preferences and items you are interested in, to send notifications to you related to your account, to process purchases, returns, exchanges or other transactions, to create, maintain and otherwise manage your account, to arrange for shipping, to facilitate any returns and exchanges, to enable you to post reviews, and to create a customized shopping experience for you, such as recommending products related to your purchases. This may include using your personal information to better tailor and improve the Services.</p>
+                <p class="exact-paragraph"><strong>Marketing and Advertising.</strong> We use your personal information for marketing and promotional purposes, such as to send marketing, advertising and promotional communications by email, text message or postal mail, and to show you online advertisements for products or services on the Services or other websites, including based on items you previously have purchased or added to your cart and other activity on the Services.</p>
+                <p class="exact-paragraph"><strong>Security and Fraud Prevention.</strong> We use your personal information to authenticate your account, to provide a secure payment and shopping experience, detect, investigate or take action regarding possible fraudulent, illegal, unsafe, or malicious activity, protect public safety, and to secure our services. If you choose to use the Services and register an account, you are responsible for keeping your account credentials safe. We highly recommend that you do not share your username, password or other access details with anyone else.</p>
+                <p class="exact-paragraph"><strong>Communicating with You.</strong> We use your personal information to provide you with customer support, to be responsive to you, to provide effective services to you and to maintain our business relationship with you.</p>
+                <p class="exact-paragraph"><strong>Legal Reasons.</strong> We use your personal information to comply with applicable law or respond to valid legal process, including requests from law enforcement or government agencies, to investigate or participate in civil discovery, potential or actual litigation, or other adversarial legal proceedings, and to enforce or investigate potential violations of our terms or policies.</p>
+
+                <h4 class="exact-section-heading">How We Disclose Personal Information</h4>
+                <p class="exact-paragraph">In certain circumstances, we may disclose your personal information to third parties for legitimate purposes subject to this Privacy Policy. Such circumstances may include:</p>
+                <p class="exact-paragraph"><strong>With Shopify, vendors and other third parties</strong> who perform services on our behalf (e.g. IT management, payment processing, data analytics, customer support, cloud storage, fulfillment and shipping).</p>
+                <p class="exact-paragraph"><strong>With business and marketing partners</strong> to provide marketing services and advertise to you. For example, we use Shopify to support personalized advertising with third-party services based on your online activity with different merchants and websites. Our business and marketing partners will use your information in accordance with their own privacy notices. Depending on where you reside, you may have a right to direct us not to share information about you to show you targeted advertisements and marketing based on your online activity with different merchants and websites.</p>
+                <p class="exact-paragraph"><strong>When you direct, request us or otherwise consent</strong> to our disclosure of certain information to third parties, such as to ship you products or through your use of social media widgets or login integrations.</p>
+                <p class="exact-paragraph"><strong>With our affiliates</strong> or otherwise within our corporate group.</p>
+                <p class="exact-paragraph"><strong>In connection with a business transaction</strong> such as a merger or bankruptcy, to comply with any applicable legal obligations (including to respond to subpoenas, search warrants and similar requests), to enforce any applicable terms of service or policies, and to protect or defend the Services, our rights, and the rights of our users or others.</p>
+
+                <h4 class="exact-section-heading">Relationship with Shopify</h4>
+                <p class="exact-paragraph">The Services are hosted by Shopify, which collects and processes personal information about your access to and use of the Services in order to provide and improve the Services for you. Information you submit to the Services will be transmitted to and shared with Shopify as well as third parties that may be located in countries other than where you reside, in order to provide and improve the Services for you. In addition, to help protect, grow, and improve our business, we use certain Shopify enhanced features that incorporate data and information obtained from your interactions with our Store, along with other merchants and with Shopify. To provide these enhanced features, Shopify may make use of personal information collected about your interactions with our store, along with other merchants, and with Shopify. In these circumstances, Shopify is responsible for the processing of your personal information, including for responding to your requests to exercise your rights over use of your personal information for these purposes. To learn more about how Shopify uses your personal information and any rights you may have, you can visit the <a href="https://www.shopify.com/legal/privacy/app-users" target="_blank" rel="noopener noreferrer" class="policy-email-link">Shopify Consumer Privacy Policy</a>. Depending on where you live, you may exercise certain rights with respect to your personal information here <a href="https://privacy.shopify.com/en" target="_blank" rel="noopener noreferrer" class="policy-email-link">Shopify Privacy Portal Link</a>.</p>
+
+                <h4 class="exact-section-heading">Third Party Websites and Links</h4>
+                <p class="exact-paragraph">The Services may provide links to websites or other online platforms operated by third parties. If you follow links to sites not affiliated or controlled by us, you should review their privacy and security policies and other terms and conditions. We do not guarantee and are not responsible for the privacy or security of such sites, including the accuracy, completeness, or reliability of information found on these sites. Information you provide on public or semi-public venues, including information you share on third-party social networking platforms may also be viewable by other users of the Services and/or users of those third-party platforms without limitation as to its use by us or by a third party. Our inclusion of such links does not, by itself, imply any endorsement of the content on such platforms or of their owners or operators, except as disclosed on the Services.</p>
+
+                <h4 class="exact-section-heading">Children's Data</h4>
+                <p class="exact-paragraph">The Services are not intended to be used by children, and we do not knowingly collect any personal information about children under the age of majority in your jurisdiction. If you are the parent or guardian of a child who has provided us with their personal information, you may contact us using the contact details set out below to request that it be deleted. As of the Effective Date of this Privacy Policy, we do not have actual knowledge that we "share" or "sell" (as those terms are defined in applicable law) personal information of individuals under 16 years of age.</p>
+
+                <h4 class="exact-section-heading">Security and Retention of Your Information</h4>
+                <p class="exact-paragraph">Please be aware that no security measures are perfect or impenetrable, and we cannot guarantee "perfect security." In addition, any information you send to us may not be secure while in transit. We recommend that you do not use unsecure channels to communicate sensitive or confidential information to us.</p>
+                <p class="exact-paragraph">How long we retain your personal information depends on different factors, such as whether we need the information to maintain your account, to provide you with Services, comply with legal obligations, resolve disputes or enforce other applicable contracts and policies.</p>
+
+                <h4 class="exact-section-heading">Your Rights and Choices</h4>
+                <p class="exact-paragraph">Depending on where you live, you may have some or all of the rights listed below in relation to your personal information. However, these rights are not absolute, may apply only in certain circumstances and, in certain cases, we may decline your request as permitted by law.</p>
+                <p class="exact-paragraph"><strong>Right to Access / Know.</strong> You may have a right to request access to personal information that we hold about you.</p>
+                <p class="exact-paragraph"><strong>Right to Delete.</strong> You may have a right to request that we delete personal information we maintain about you.</p>
+                <p class="exact-paragraph"><strong>Right to Correct.</strong> You may have a right to request that we correct inaccurate personal information we maintain about you.</p>
+                <p class="exact-paragraph"><strong>Right of Portability.</strong> You may have a right to receive a copy of the personal information we hold about you and to request that we transfer it to a third party, in certain circumstances and with certain exceptions.</p>
+                <p class="exact-paragraph"><strong>Managing Communication Preferences.</strong> We may send you promotional emails, and you may opt out of receiving these at any time by using the unsubscribe option displayed in our emails to you. If you opt out, we may still send you non-promotional emails, such as those about your account or orders that you have made.</p>
+                <p class="exact-paragraph">You may exercise any of these rights where indicated on the Services or by contacting us using the contact details provided below. To learn more about how Shopify uses your personal information and any rights you may have, including rights related to data processed by Shopify, you can visit <a href="https://privacy.shopify.com/en" target="_blank" rel="noopener noreferrer" class="policy-email-link">https://privacy.shopify.com/en</a>.</p>
+                <p class="exact-paragraph">We will not discriminate against you for exercising any of these rights. We may need to verify your identity before we can process your requests, as permitted or required under applicable law. In accordance with applicable laws, you may designate an authorized agent to make requests on your behalf to exercise your rights. Before accepting such a request from an agent, we will require that the agent provide proof you have authorized them to act on your behalf, and we may need you to verify your identity directly with us. We will respond to your request in a timely manner as required under applicable law.</p>
+
+                <h4 class="exact-section-heading">Complaints</h4>
+                <p class="exact-paragraph">If you have complaints about how we process your personal information, please contact us using the contact details provided below. Depending on where you live, you may have the right to appeal our decision by contacting us using the contact details set out below, or lodge your complaint with your local data protection authority.</p>
+
+                <h4 class="exact-section-heading">Changes to This Privacy Policy</h4>
+                <p class="exact-paragraph">We may update this Privacy Policy from time to time, including to reflect changes to our practices or for other operational, legal, or regulatory reasons. We will post the revised Privacy Policy on this website, update the "Last updated" date and provide notice as required by applicable law.</p>
+
+                <h4 class="exact-section-heading">Contact</h4>
+                <p class="exact-paragraph">Should you have any questions about our privacy practices or this Privacy Policy, or if you would like to exercise any of the rights available to you, please call or email us at <a href="mailto:adityarajkumar245@gmail.com" class="policy-email-link">adityarajkumar245@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+
+                    <!-- 05. Terms of Service Pane -->
+          <div class="policy-tab-pane" id="PolicyPane-terms" role="tabpanel" style="display: none;">
+            <div class="policy-content-article">
+              <div class="exact-policy-doc">
+                <h3 class="exact-doc-title font-sans">Terms of service</h3>
+
+                <h4 class="exact-section-heading">OVERVIEW</h4>
+                <p class="exact-paragraph">Welcome to FABERELIN! The terms “we”, “us” and “our” refer to FABERELIN. FABERELIN operates this store and website, including all related information, content, features, tools, products and services in order to provide you, the customer, with a curated shopping experience (the “Services”). FABERELIN is powered by Shopify, which enables us to provide the Services to you.</p>
+                <p class="exact-paragraph">The below terms and conditions, together with any policies referenced herein (these “Terms of Service” or “Terms”) describe your rights and responsibilities when you use the Services.</p>
+                <p class="exact-paragraph">Please read these Terms of Service carefully, as they include important information about your legal rights and cover areas such as warranty disclaimers and limitations of liability.</p>
+                <p class="exact-paragraph">By visiting, interacting with or using our Services, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these Terms of Service or Privacy Policy, you should not use or access our Services.</p>
+
+                <h4 class="exact-section-heading">SECTION 1 - ACCESS AND ACCOUNT</h4>
+                <p class="exact-paragraph">By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, and you have given us your consent to allow any of your minor dependents to use the Services on devices you own, purchase or manage.</p>
+                <p class="exact-paragraph">To use the Services, including accessing or browsing our online stores or purchasing any of the products or services we offer, you may be asked to provide certain information, such as your email address, billing, payment, and shipping information. You represent and warrant that all the information you provide in our stores is correct, current and complete and that you have all rights necessary to provide this information.</p>
+                <p class="exact-paragraph">You are solely responsible for maintaining the security of your account credentials and for all of your account activity. You may not transfer, sell, assign, or license your account to any other person.</p>
+
+                <h4 class="exact-section-heading">SECTION 2 - OUR PRODUCTS</h4>
+                <p class="exact-paragraph">We have made every effort to provide an accurate representation of our products and services in our online stores. However, please note that colors or product appearance may differ from how they may appear on your screen due to the type of device you use to access the store and your device settings and configuration.</p>
+                <p class="exact-paragraph">We do not warrant that the appearance or quality of any products or services purchased by you will meet your expectations or be the same as depicted or rendered in our online stores.</p>
+                <p class="exact-paragraph">All descriptions of products are subject to change at any time without notice at our sole discretion. We reserve the right to discontinue any product at any time and may limit the quantities of any products that we offer to any person, geographic region or jurisdiction, on a case-by-case basis.</p>
+
+                <h4 class="exact-section-heading">SECTION 3 - ORDERS</h4>
+                <p class="exact-paragraph">When you place an order, you are making an offer to purchase. FABERELIN reserves the right to accept or decline your order for any reason at its discretion. Your order is not accepted until FABERELIN confirms acceptance. We must receive and process your payment before your order is accepted. Please review your order carefully before submitting, as FABERELIN may be unable to accommodate cancellation requests after an order is accepted. In the event that we do not accept, make a change to, or cancel an order, we will attempt to notify you by contacting the e‑mail, billing address, and/or phone number provided at the time the order was made.</p>
+                <p class="exact-paragraph">Your purchases are subject to return or exchange solely in accordance with our Refund Policy. You represent and warrant that your purchases are for your own personal or household use and not for commercial resale or export.</p>
+
+                <h4 class="exact-section-heading">SECTION 4 - PRICES AND BILLING</h4>
+                <p class="exact-paragraph">Prices, discounts and promotions are subject to change without notice. The price charged for a product or service will be the price in effect at the time the order is placed and will be set out in your order confirmation email. Unless otherwise expressly stated, posted prices do not include taxes, shipping, handling, customs or import charges.</p>
+                <p class="exact-paragraph">Prices posted in our online stores may be different from prices offered in physical stores or in online or other stores operated by third parties. We may offer, from time to time, promotions on the Services that may affect pricing and that are governed by terms and conditions separate from these Terms. If there is a conflict between the terms for a promotion and these Terms, the promotion terms will govern.</p>
+                <p class="exact-paragraph">You agree to provide current, complete and accurate purchase, payment and account information for all purchases made at our stores. You agree to promptly update your account and other information, including your email address, credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.</p>
+                <p class="exact-paragraph">You represent and warrant that (i) the credit card information you provide is true, correct, and complete, (ii) you are duly authorized to use such credit card for the purchase, (iii) charges incurred by you will be honored by your credit card company, and (iv) you will pay charges incurred by you at the posted prices, including shipping and handling charges and all applicable taxes, if any.</p>
+
+                <h4 class="exact-section-heading">SECTION 5 - SHIPPING AND DELIVERY</h4>
+                <p class="exact-paragraph">We are not liable for shipping and delivery delays. All delivery times are estimates only and are not guaranteed. We are not responsible for delays caused by shipping carriers, customs processing, or events outside our control. Once we transfer products to the carrier, title and risk of loss passes to you.</p>
+
+                <h4 class="exact-section-heading">SECTION 6 - INTELLECTUAL PROPERTY</h4>
+                <p class="exact-paragraph">Our Services, including but not limited to all trademarks, brands, text, displays, images, graphics, product reviews, video, and audio, and the design, selection, and arrangement thereof, are owned by FABERELIN, its affiliates or licensors and are protected by U.S. and foreign patent, copyright and other intellectual property laws.</p>
+                <p class="exact-paragraph">These Terms permit you to use the Services for your personal, non-commercial use only. You must not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on the Services without our prior written consent. Except as expressly provided herein, nothing in these Terms grants or shall be construed as granting a license or other rights to you under any patent, trademark, copyright, or other intellectual property of FABERELIN, Shopify or any third party. Unauthorized use of the Services may be a violation of federal and state intellectual property laws. All rights not expressly granted herein are reserved by FABERELIN.</p>
+                <p class="exact-paragraph">FABERELIN’s names, logos, product and service names, designs, and slogans are trademarks of FABERELIN or its affiliates or licensors. You must not use such trademarks without the prior written permission of FABERELIN. Shopify’s name, logo, product and service names, designs and slogans are trademarks of Shopify. All other names, logos, product and service names, designs, and slogans on the Services are the trademarks of their respective owners.</p>
+
+                <h4 class="exact-section-heading">SECTION 7 - OPTIONAL TOOLS</h4>
+                <p class="exact-paragraph">You may be provided with access to customer tools offered by third parties as part of the Services, which we neither monitor nor have any control nor input.</p>
+                <p class="exact-paragraph">You acknowledge and agree that we provide access to such tools “as is” and “as available” without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.</p>
+                <p class="exact-paragraph">Any use by you of the optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s).</p>
+                <p class="exact-paragraph">We may also, in the future, offer new features through the Services (including the release of new tools and resources). Such new features shall also be deemed part of the Services and are subject to these Terms of Service.</p>
+
+                <h4 class="exact-section-heading">SECTION 8 - THIRD-PARTY LINKS</h4>
+                <p class="exact-paragraph">The Services may contain materials and hyperlinks to websites provided or operated by third parties (including any embedded third party functionality). We are not responsible for examining or evaluating the content or accuracy of any third-party materials or websites you choose to access. If you decide to leave the Services to access these materials or third party sites, you do so at your own risk.</p>
+                <p class="exact-paragraph">We are not liable for any harm or damages related to your access of any third-party websites, or your purchase or use of any products, services, resources, or content on any third-party websites. Please review carefully the third-party's policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products and services should be directed to the third-party.</p>
+
+                <h4 class="exact-section-heading">SECTION 9 - RELATIONSHIP WITH SHOPIFY</h4>
+                <p class="exact-paragraph">FABERELIN is powered by Shopify, which enables us to provide the Services to you. However, any sales and purchases you make in our Store are made directly with FABERELIN. By using the Services, you acknowledge and agree that Shopify is not responsible for any aspect of any sales between you and FABERELIN, including any injury, damage, or loss resulting from purchased products and services. You hereby expressly release Shopify and its affiliates from all claims, damages, and liabilities arising from or related to your purchases and transactions with FABERELIN.</p>
+
+                <h4 class="exact-section-heading">SECTION 10 - PRIVACY POLICY</h4>
+                <p class="exact-paragraph">All personal information we collect through the Services is subject to our Privacy Policy, and certain personal information may be subject to Shopify’s Privacy Policy, which can be viewed <a href="https://www.shopify.com/legal/privacy/app-users" target="_blank" rel="noopener noreferrer" class="policy-email-link">here</a>. By using the Services, you acknowledge that you have read these privacy policies.</p>
+                <p class="exact-paragraph">Because the Services are hosted by Shopify, Shopify collects and processes personal information about your access to and use of the Services in order to provide and improve the Services for you. Information you submit to the Services will be transmitted to and shared with Shopify as well as third parties that may be located in other countries than where you reside, in order to provide services to you. Review our privacy policy for more details on how we, Shopify, and our partners use your personal information.</p>
+
+                <h4 class="exact-section-heading">SECTION 11 - FEEDBACK</h4>
+                <p class="exact-paragraph">If you submit, upload, post, email, or otherwise transmit any ideas, suggestions, feedback, reviews, proposals, plans, or other content (collectively, “Feedback”), you grant us a perpetual, worldwide, sublicensable, royalty-free license to use, reproduce, modify, publish, distribute and display such Feedback in any medium for any purpose, including for commercial use. We may, for example, use our rights under this license to operate, provide, evaluate, enhance, improve and promote the Services and to perform our obligations and exercise our rights under the Terms of Service.</p>
+                <p class="exact-paragraph">You also represent and warrant that: (i) you own or have all necessary rights to all Feedback; (ii) you have disclosed any compensation or incentives received in connection with your submission of Feedback; and (iii) your Feedback will comply with these Terms. We are and shall be under no obligation (1) to maintain your Feedback in confidence; (2) to pay compensation for your Feedback; or (3) to respond to your Feedback.</p>
+                <p class="exact-paragraph">We may, but have no obligation to, monitor, edit or remove Feedback that we determine in our sole discretion to be unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.</p>
+                <p class="exact-paragraph">You agree that your Feedback will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your Feedback will not contain libelous or otherwise unlawful, abusive or obscene Feedback, or contain any computer virus or other malware that could in any way affect the operation of the Services or any related website. You may not use a false email address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any Feedback. You are solely responsible for any Feedback you make and its accuracy. We take no responsibility and assume no liability for any Feedback posted by you or any third-party.</p>
+
+                <h4 class="exact-section-heading">SECTION 12 - ERRORS, INACCURACIES AND OMISSIONS</h4>
+                <p class="exact-paragraph">Occasionally there may be information on or in the Services that contain typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information is inaccurate at any time without prior notice (including after you have submitted your order).</p>
+
+                <h4 class="exact-section-heading">SECTION 13 - PROHIBITED USES</h4>
+                <p class="exact-paragraph">You may access and use the Services for lawful purposes only. You may not access or use the Services, directly or indirectly: (a) for any unlawful or malicious purpose; (b) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (c) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (d) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or harm any of our employees or any other person; (e) to transmit false or misleading information; (f) to send, knowingly receive, upload, download, use, or re-use any material that does not comply with the these Terms; (g) to transmit, or procure the sending of, any advertising or promotional material, including any “junk mail,” “chain letter,” “spam,” or any other similar solicitation; (h) to impersonate or attempt to impersonate any other person or entity; or (i) to engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Services, or which, as determined by us, may harm FABERELIN, Shopify or users of the Services, or expose them to liability.</p>
+                <p class="exact-paragraph">In addition, you agree not to: (a) upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Services; (b) reproduce, duplicate, copy, sell, resell or exploit any portion of the Services; (c) collect or track the personal information of others; (d) spam, phish, pharm, pretext, spider, crawl, or scrape; or (e) interfere with or circumvent the security features of the Services or any related website, other websites, or the Internet. We reserve the right to suspend, disable, or terminate your account at any time, without notice, if we determine that you have violated any part of these Terms.</p>
+
+                <h4 class="exact-section-heading">SECTION 14 - TERMINATION</h4>
+                <p class="exact-paragraph">We may terminate this agreement or your access to the Services (or any part thereof) in our sole discretion at any time without notice, and you will remain liable for all amounts due up to and including the date of termination.</p>
+                <p class="exact-paragraph">The following sections will continue to apply following any termination: Intellectual Property, Feedback, Termination, Disclaimer of Warranties, Limitation of Liability, Indemnification, Severability, Waiver; Entire Agreement, Assignment, Governing Law, Privacy Policy, and any other provisions that by their nature should survive termination.</p>
+
+                <h4 class="exact-section-heading">SECTION 15 - DISCLAIMER OF WARRANTIES</h4>
+                <p class="exact-paragraph">The information presented on or through the Services is made available solely for general information purposes. We do not warrant the accuracy, completeness, or usefulness of this information. Any reliance you place on such information is strictly at your own risk. We disclaim all liability and responsibility arising from any reliance placed on such materials by you or any other visitor to the Services, or by anyone who may be informed of any of its contents.</p>
+                <p class="exact-paragraph">EXCEPT AS EXPRESSLY STATED BY FABERELIN, THE SERVICES AND ALL PRODUCTS OFFERED THROUGH THE SERVICES ARE PROVIDED 'AS IS' AND 'AS AVAILABLE' FOR YOUR USE, WITHOUT ANY REPRESENTATION, WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ALL IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, DURABILITY, TITLE, AND NON-INFRINGEMENT. WE DO NOT GUARANTEE, REPRESENT OR WARRANT THAT YOUR USE OF THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE OR ERROR-FREE. SOME JURISDICTIONS LIMIT OR DO NOT ALLOW THE DISCLAIMER OF IMPLIED OR OTHER WARRANTIES SO THE ABOVE DISCLAIMER MAY NOT APPLY TO YOU.</p>
+
+                <h4 class="exact-section-heading">SECTION 16 - LIMITATION OF LIABILITY</h4>
+                <p class="exact-paragraph">TO THE FULLEST EXTENT PROVIDED BY LAW, IN NO CASE SHALL FABERELIN, OUR PARTNERS, DIRECTORS, OFFICERS, EMPLOYEES, AFFILIATES, AGENTS, CONTRACTORS, SERVICE PROVIDERS OR LICENSORS, OR THOSE OF SHOPIFY AND ITS AFFILIATES, BE LIABLE FOR ANY INJURY, LOSS, CLAIM, OR ANY DIRECT, INDIRECT, INCIDENTAL, PUNITIVE, SPECIAL, OR CONSEQUENTIAL DAMAGES OF ANY KIND, INCLUDING, WITHOUT LIMITATION, LOST PROFITS, LOST REVENUE, LOST SAVINGS, LOSS OF DATA, REPLACEMENT COSTS, OR ANY SIMILAR DAMAGES, WHETHER BASED IN CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, ARISING FROM YOUR USE OF ANY OF THE SERVICES OR ANY PRODUCTS PROCURED USING THE SERVICES, OR FOR ANY OTHER CLAIM RELATED IN ANY WAY TO YOUR USE OF THE SERVICES OR ANY PRODUCT, INCLUDING, BUT NOT LIMITED TO, ANY ERRORS OR OMISSIONS IN ANY CONTENT, OR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF THE SERVICES OR ANY CONTENT (OR PRODUCT) POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SERVICES, EVEN IF ADVISED OF THEIR POSSIBILITY.</p>
+
+                <h4 class="exact-section-heading">SECTION 17 - INDEMNIFICATION</h4>
+                <p class="exact-paragraph">You agree to indemnify, defend and hold harmless FABERELIN, Shopify, and our affiliates, partners, officers, directors, employees, agents, contractors, licensors, and service providers from any losses, damages, liabilities or claims, including reasonable attorneys’ fees, payable to any third party due to or arising out of (1) your breach of these Terms of Service or the documents they incorporate by reference, (2) your violation of any law or the rights of a third party, or (3) your access to and use of the Services.</p>
+                <p class="exact-paragraph">We will notify you of any indemnifiable claim, provided that a failure to promptly notify will not relieve you of your obligations unless you are materially prejudiced. We may control the defense and settlement of such claim at your expense, including choice of counsel, but will not settle any claim requiring non-monetary obligations from you without your consent (not to be unreasonably withheld). You will cooperate in the defense of indemnified claims, including by providing relevant documents.</p>
+
+                <h4 class="exact-section-heading">SECTION 18 - SEVERABILITY</h4>
+                <p class="exact-paragraph">In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions.</p>
+
+                <h4 class="exact-section-heading">SECTION 19 - WAIVER; ENTIRE AGREEMENT</h4>
+                <p class="exact-paragraph">The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision.</p>
+                <p class="exact-paragraph">These Terms of Service and any policies or operating rules posted by us on this site or in respect to the Service constitutes the entire agreement and understanding between you and us and governs your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).</p>
+                <p class="exact-paragraph">Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party.</p>
+
+                <h4 class="exact-section-heading">SECTION 20 - ASSIGNMENT</h4>
+                <p class="exact-paragraph">You may not delegate, transfer or assign this Agreement or any of your rights or obligations under these Terms without our prior written consent, and any such attempt will be null and void. We may transfer, assign, or delegate these Terms and our rights and obligations without consent or notice to you.</p>
+
+                <h4 class="exact-section-heading">SECTION 21 - GOVERNING LAW</h4>
+                <p class="exact-paragraph">These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the federal and state or territorial courts in the jurisdiction where FABERELIN is headquartered. You and FABERELIN consent to venue and personal jurisdiction in such courts.</p>
+
+                <h4 class="exact-section-heading">SECTION 22 - HEADINGS</h4>
+                <p class="exact-paragraph">The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.</p>
+
+                <h4 class="exact-section-heading">SECTION 23 - CHANGES TO TERMS OF SERVICE</h4>
+                <p class="exact-paragraph">You can review the most current version of the Terms of Service at any time on this page.</p>
+                <p class="exact-paragraph">We reserve the right, in our sole discretion, to update, change, or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. We will notify you of any material changes to these Terms in accordance with applicable law, and such changes will be effective on the date specified in the notice. Your continued use of or access to the Services following the posting of any changes to these Terms of Service constitutes acceptance of those changes.</p>
+
+                <h4 class="exact-section-heading">SECTION 24 - CONTACT INFORMATION</h4>
+                <p class="exact-paragraph">Questions about the Terms of Service should be sent to us at <a href="mailto:indiacontact.faberelin@gmail.com" class="policy-email-link">indiacontact.faberelin@gmail.com</a>. Our contact information is posted below:</p>
+                <p class="exact-paragraph"><strong>Faberelin</strong><br><a href="mailto:adityarajkumar245@gmail.com" class="policy-email-link">adityarajkumar245@gmail.com</a><br>Bangalore<br>GST:- 29FGLPA2616E1ZL</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="policy-modal-footer">
+          <div class="policy-footer-note">
+            Official Faberelin Client Policies &copy; 2024. Sourced from Atelier Documentation.
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <a href="mailto:indiacontact.faberelin@gmail.com" class="btn-secondary-light" style="padding: 0.45rem 1rem; font-size: 0.72rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>EMAIL SUPPORT</span>
+            </a>
+            <button type="button" class="btn-primary" onclick="closePolicyModal()" style="padding: 0.45rem 1.25rem; font-size: 0.72rem; height: 38px;">
+              CLOSE
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- =========================================================================
+         SITE FOOTER (4-COLUMN / 3-COLUMN CUSTOMIZABLE EDITORIAL)
+         ========================================================================= -->
+    <footer class="site-footer" id="SiteFooter">
+      <div class="container">
+        
+        <div class="footer-grid cols-4" id="LiveFooterGrid">
+          
+          <!-- 01. Newsletter Column -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">NEWSLETTER</h4>
+            <p class="footer-col-text">
+              Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories.
+            </p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); ThemeUI.showToast('Subscribed to Faberelin Newsletter'); this.reset();">
+              <input type="email" class="newsletter-input" placeholder="Your email address" required aria-label="Your email address">
+              <button type="submit" class="newsletter-btn">JOIN</button>
+            </form>
+          </div>
+
+          <!-- 02. Navigation -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">CATALOGUE ITEMS</h4>
+            <ul class="footer-links-list">
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('casual-t-shirt')">Casual T-Shirt</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('polo-t-shirt')">Polo T-Shirt</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('oversized-t-shirt')">Oversized T-Shirt</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('essential-hoodie')">Essential Hoodie</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('oversized-hoodie')">Oversized Hoodie</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="selectCatalogueProduct('essential-sweatpants')">Essential Sweatpants</a></li>
+            </ul>
+          </div>
+
+          <!-- 03. Order Tracking Column -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">ORDER TRACKING</h4>
+            <p class="footer-col-text">
+              Track real-time carbon-neutral shipment progress across India:
+            </p>
+            <form class="tracking-form" id="FooterTrackingForm" onsubmit="event.preventDefault(); window.handleOrderTracking();">
+              <input
+                type="text"
+                class="tracking-input"
+                id="FooterTrackingInput"
+                placeholder="#FBR-8924"
+                required
+                aria-label="Order or Tracking Number"
+              />
+              <button type="submit" class="tracking-btn">TRACK</button>
+            </form>
+
+            <div class="tracking-status-card" id="FooterTrackingStatus">
+              <div class="tracking-status-header">
+                <span class="tracking-pill">IN TRANSIT</span>
+                <span style="font-size: 0.65rem; color: #888;">Bluedart Express</span>
+              </div>
+              <p style="font-size: 0.72rem; color: #444; margin-block: 0.35rem 0.25rem;">
+                Estimated Delivery: <strong>Tomorrow by 6:00 PM</strong>
+              </p>
+              <div class="tracking-progress-bar">
+                <div class="tracking-progress-fill" style="width: 72%;"></div>
+              </div>
+              <span style="font-size: 0.6rem; color: #777;">Departed Sorting Hub — Mumbai</span>
+            </div>
+          </div>
+
+          <!-- 04. Support Column (5 Subgroups) -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">SUPPORT</h4>
+            <ul class="footer-links-list">
+              <li><a href="javascript:void(0)" class="footer-link" onclick="openPolicyModal('contact')">1. Contact Us</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="openPolicyModal('shipping')">2. Shipping Policy</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="openPolicyModal('refund')">3. Refund Policy</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="openPolicyModal('privacy')">4. Privacy Policy</a></li>
+              <li><a href="javascript:void(0)" class="footer-link" onclick="openPolicyModal('terms')">5. Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Copyright & Intentionality Tagline -->
+        <div class="footer-bottom-bar">
+          <div class="footer-copy">
+            &copy; 2024 FABERELIN INDIA. ALL RIGHTS RESERVED.
+          </div>
+          <div class="footer-tagline">
+            DESIGNED FOR INTENTIONALITY.
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Stratos Theme Core Script -->
+  <script src="./assets/application.js"></script>
+
+  <!-- Interactive Demo Navigation Script -->
+  <script>
+    // View Switcher
+    function switchView(viewId) {
+      document.querySelectorAll('.theme-view-pane').forEach(p => {
+        p.style.display = 'none';
+        p.classList.remove('is-visible');
+      });
+
+      const activeBtn = document.querySelector(`[data-view-target="${viewId}"]`);
+      if (activeBtn) {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('is-active'));
+        activeBtn.classList.add('is-active');
+      }
+
+      // Update header nav link active underline
+      const navDiscover = document.getElementById('NavDiscoverLink');
+      const navCatalogue = document.getElementById('NavCatalogueLink');
+      if (navDiscover && navCatalogue) {
+        if (viewId === 'view-discover') {
+          navDiscover.classList.add('is-active');
+          navCatalogue.classList.remove('is-active');
+        } else if (viewId === 'view-catalogue' || viewId === 'view-product') {
+          navCatalogue.classList.add('is-active');
+          navDiscover.classList.remove('is-active');
+        } else {
+          navDiscover.classList.remove('is-active');
+          navCatalogue.classList.remove('is-active');
+        }
+      }
+
+      // Update mobile nav drawer links active state
+      document.querySelectorAll('.mobile-nav-item').forEach(item => item.classList.remove('is-active'));
+      if (viewId === 'view-catalogue') {
+        const item = document.getElementById('MobileNavCatalogueLink');
+        if (item) item.classList.add('is-active');
+      } else if (viewId === 'view-product') {
+        const item = document.getElementById('MobileNavProductLink');
+        if (item) item.classList.add('is-active');
+      } else if (viewId === 'view-discover') {
+        const item = document.getElementById('MobileNavDiscoverLink');
+        if (item) item.classList.add('is-active');
+      } else if (viewId === 'view-code') {
+        const item = document.getElementById('MobileNavCodeLink');
+        if (item) item.classList.add('is-active');
+      }
+
+      // Hide sticky ATC bar if leaving product view
+      if (viewId !== 'view-product') {
+        const mobileBar = document.getElementById('MobileStickyATC');
+        if (mobileBar) mobileBar.classList.remove('is-visible');
+        document.body.classList.remove('has-sticky-atc');
+      }
+
+      if (viewId === 'view-catalogue') {
+        const viewEl = document.getElementById('ViewCatalogue');
+        if (viewEl) viewEl.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (viewId === 'view-product') {
+        const viewEl = document.getElementById('ViewProduct');
+        if (viewEl) viewEl.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (viewId === 'view-discover') {
+        const viewEl = document.getElementById('ViewDiscover');
+        if (viewEl) {
+          viewEl.style.display = 'block';
+          viewEl.querySelectorAll('video').forEach(video => {
+            video.currentTime = 0;
+            video.play().catch(() => {});
+          });
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (viewId === 'view-code') {
+        const codeView = document.getElementById('ViewCode');
+        if (codeView) {
+          codeView.style.display = 'block';
+          codeView.classList.add('is-visible');
+        }
+        loadCodeFile('css');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-view-target');
+        if (target) switchView(target);
+      });
+    });
+
+    // Product Layout Split Switcher
+    document.querySelectorAll('[data-product-split]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-product-split]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const splitClass = btn.getAttribute('data-product-split');
+        const layout = document.getElementById('LiveProductLayout');
+        if (layout && splitClass) {
+          layout.className = `product-layout ${splitClass}`;
+          ThemeUI.showToast(`Product gallery split updated to ${btn.textContent}`);
+        }
+      });
+    });
+
+    // Footer Columns Switcher (3 vs 4 Cols)
+    document.querySelectorAll('[data-footer-cols]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-footer-cols]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const colClass = btn.getAttribute('data-footer-cols');
+        const footerGrid = document.getElementById('LiveFooterGrid');
+        if (footerGrid && colClass) {
+          footerGrid.className = `footer-grid ${colClass}`;
+          ThemeUI.showToast(`Footer layout updated to ${btn.textContent}`);
+        }
+      });
+    });
+
+    // Viewport Simulator Toggle
+    const simWrapper = document.getElementById('DeviceSimulatorWrapper');
+    const desktopBtn = document.getElementById('ViewportDesktopBtn');
+    const mobileBtn = document.getElementById('ViewportMobileBtn');
+
+    if (desktopBtn && simWrapper) {
+      desktopBtn.addEventListener('click', () => {
+        simWrapper.classList.remove('is-mobile-frame');
+        desktopBtn.style.background = '#333';
+        desktopBtn.style.color = '#FFF';
+        if (mobileBtn) {
+          mobileBtn.style.background = '#1E1E1E';
+          mobileBtn.style.color = '#888';
+        }
+        setTimeout(() => {
+          if (window.productCarousel) window.productCarousel.goToSlide(window.productCarousel.currentIndex);
+        }, 150);
+      });
+    }
+
+    if (mobileBtn && simWrapper) {
+      mobileBtn.addEventListener('click', () => {
+        simWrapper.classList.add('is-mobile-frame');
+        mobileBtn.style.background = '#333';
+        mobileBtn.style.color = '#FFF';
+        if (desktopBtn) {
+          desktopBtn.style.background = '#1E1E1E';
+          desktopBtn.style.color = '#888';
+        }
+        setTimeout(() => {
+          if (window.productCarousel) window.productCarousel.goToSlide(window.productCarousel.currentIndex);
+        }, 150);
+      });
+    }
+
+    // Checkout Modal
+    function openCheckoutModal() {
+      if (window.cartController) window.cartController.close();
+      const modal = document.getElementById('CheckoutModal');
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function simulateOrderSuccess(method) {
+      const modal = document.getElementById('CheckoutModal');
+      if (modal) modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      try {
+        sessionStorage.removeItem('stratos_cart_items');
+      } catch (e) {}
+      if (window.cartController) window.cartController.render([]);
+      alert(`🎉 Order Confirmed!\nThank you for choosing Faberelin.\nPayment confirmed via ${method}.\nYour tracking number and carbon offset certificate will be emailed shortly.`);
+    }
+
+    // Code Inspector File Loader with Fallback
+    const codeFiles = {
+      css: `./assets/application.css`,
+      js: `./assets/application.js`,
+      'login-liquid': `./sections/main-login.liquid`,
+      'register-liquid': `./sections/main-register.liquid`,
+      'product-liquid': `./sections/main-product-standard.liquid`,
+      'lookbook-liquid': `./sections/lookbook-story.liquid`,
+      'lookbook-story': `./sections/lookbook-story.liquid`,
+      'footer-liquid': `./sections/footer.liquid`,
+      'schema-json': `./config/settings_schema.json`
+    };
+
+    // Customer Authentication Modal Handlers
+    function openAuthModal() {
+      if (window.cartController) window.cartController.close();
+      const modal = document.getElementById('AuthModal');
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function switchAuthTab(tab) {
+      const signInTab = document.getElementById('TabSignInBtn');
+      const regTab = document.getElementById('TabRegisterBtn');
+      const signInPane = document.getElementById('AuthSignInPane');
+      const regPane = document.getElementById('AuthRegisterPane');
+      const recoverPane = document.getElementById('ModalRecoverPane');
+
+      if (tab === 'signin') {
+        if (signInTab) signInTab.classList.add('is-active');
+        if (regTab) regTab.classList.remove('is-active');
+        if (signInPane) signInPane.style.display = 'block';
+        if (regPane) regPane.style.display = 'none';
+        if (recoverPane) recoverPane.style.display = 'none';
+      } else {
+        if (regTab) regTab.classList.add('is-active');
+        if (signInTab) signInTab.classList.remove('is-active');
+        if (regPane) regPane.style.display = 'block';
+        if (signInPane) signInPane.style.display = 'none';
+        if (recoverPane) recoverPane.style.display = 'none';
+      }
+    }
+
+    function toggleRecoverPassword(show) {
+      const recoverPane = document.getElementById('ModalRecoverPane');
+      const form = document.getElementById('ModalLoginForm');
+      if (recoverPane) recoverPane.style.display = show ? 'block' : 'none';
+      if (form) form.style.display = show ? 'none' : 'flex';
+    }
+
+    function handleModalAuthSubmit(type) {
+      const modal = document.getElementById('AuthModal');
+      if (type === 'login') {
+        const email = document.getElementById('ModalLoginEmail').value;
+        if (modal) modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        ThemeUI.showToast(`Welcome back, ${email.split('@')[0]}!`);
+      } else if (type === 'register') {
+        const first = document.getElementById('ModalRegFirst').value;
+        if (modal) modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        ThemeUI.showToast(`Account created! Welcome to Faberelin, ${first}.`);
+      } else if (type === 'recover') {
+        toggleRecoverPassword(false);
+        ThemeUI.showToast(`Password reset link sent to your email!`);
+      }
+    }
+
+    function loadCodeFile(fileKey) {
+      const codeEl = document.getElementById('CodeInspectorContent');
+      if (!codeEl) return;
+      codeEl.textContent = `/* Loading ${codeFiles[fileKey]} ... */`;
+      
+      fetch(codeFiles[fileKey])
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.text();
+        })
+        .then(data => {
+          codeEl.textContent = data;
+        })
+        .catch(err => {
+          codeEl.textContent = `/* Stratos Theme File: ${codeFiles[fileKey]} */\n// View file directly at: /stratos-shopify-theme/${codeFiles[fileKey]}`;
+        });
+    }
+
+    document.querySelectorAll('.code-tab-btn').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.code-tab-btn').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const fileKey = tab.getAttribute('data-code-file');
+        if (fileKey) loadCodeFile(fileKey);
+      });
+    });
+
+    const copyBtn = document.getElementById('CodeCopyBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const codeEl = document.getElementById('CodeInspectorContent');
+        const text = codeEl ? codeEl.textContent : '';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            ThemeUI.showToast('Code copied to clipboard!');
+          });
+        }
+      });
+    }
+
+    // Interactive Search Bar Controller
+    const searchInput = document.getElementById('HeaderSearchInput');
+    const searchClear = document.getElementById('HeaderSearchClear');
+    const searchDropdown = document.getElementById('HeaderSearchDropdown');
+    const searchBar = document.getElementById('HeaderSearchBar');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        if (searchClear) {
+          searchClear.classList.toggle('is-visible', query.length > 0);
+        }
+        if (searchDropdown) {
+          searchDropdown.classList.toggle('is-open', query.length > 0);
+        }
+      });
+
+      searchInput.addEventListener('focus', () => {
+        if (searchBar) searchBar.classList.add('is-expanded');
+        if (searchInput.value.trim().length > 0 && searchDropdown) {
+          searchDropdown.classList.add('is-open');
+        }
+      });
+
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          searchClear.classList.remove('is-visible');
+          if (searchDropdown) searchDropdown.classList.remove('is-open');
+          searchInput.focus();
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        const wrapper = document.getElementById('HeaderSearchWrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+          if (searchDropdown) searchDropdown.classList.remove('is-open');
+          if (searchBar) searchBar.classList.remove('is-expanded');
+        }
+      });
+    }
+
+    // Order Tracking Form Handler
+    window.handleOrderTracking = function() {
+      const input = document.getElementById('FooterTrackingInput');
+      const card = document.getElementById('FooterTrackingStatus');
+      const val = input ? input.value.trim() : '';
+
+      if (!val) {
+        ThemeUI.showToast('Please enter an order or tracking number');
+        return;
+      }
+
+      ThemeUI.showToast(`Locating shipment ${val}...`);
+      if (card) {
+        card.classList.remove('is-visible');
+        setTimeout(() => {
+          card.classList.add('is-visible');
+          ThemeUI.showToast(`Tracking status updated for ${val}`);
+        }, 350);
+      }
+    };
+  </script>
+</body>
+</html>

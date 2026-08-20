@@ -1,0 +1,64 @@
+{% comment %}
+  Product Card Snippet - Stratos Theme
+  Reusable product card with dual-image hover preview, tags, swatches, and quick add.
+{% endcomment %}
+
+<div class="product-card" data-product-handle="{{ product.handle }}">
+  <div class="product-card-media">
+    {%- if product.tags contains 'new' or product.compare_at_price > product.price -%}
+      <span class="product-card-badge">
+        {%- if product.compare_at_price > product.price -%}
+          SALE
+        {%- else -%}
+          NEW
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" aria-label="View {{ product.title }}">
+      <img
+        class="product-card-img-primary"
+        src="{{ product.featured_image | image_url: width: 700 }}"
+        alt="{{ product.title | escape }}"
+        width="700"
+        height="933"
+        loading="lazy"
+      >
+      {%- if product.images[1] -%}
+        <img
+          class="product-card-img-secondary"
+          src="{{ product.images[1] | image_url: width: 700 }}"
+          alt="{{ product.title | escape }} secondary view"
+          width="700"
+          height="933"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </a>
+
+    <button
+      type="button"
+      class="product-card-quick-add"
+      data-quick-add="{{ product.id }}"
+      data-title="{{ product.title }}"
+      data-price="{{ product.price | money_without_currency }}"
+    >
+      + QUICK ADD
+    </button>
+  </div>
+
+  <div class="product-card-info">
+    <a href="{{ product.url }}" class="product-card-title">
+      {{ product.title }}
+    </a>
+    <div class="product-card-price">
+      {{ product.price | money }}
+    </div>
+
+    <div class="product-card-swatches" aria-label="Available Colors">
+      <span class="mini-swatch" style="background-color: #D9D2C7;" title="Sand"></span>
+      <span class="mini-swatch" style="background-color: #C4BCAC;" title="Oat"></span>
+      <span class="mini-swatch" style="background-color: #4B4E4D;" title="Charcoal"></span>
+    </div>
+  </div>
+</div>

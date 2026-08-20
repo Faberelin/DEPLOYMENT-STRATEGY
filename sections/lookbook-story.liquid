@@ -1,0 +1,144 @@
+{% comment %}
+  Lookbook Story Section - Stratos Theme
+  Asymmetric 2-Column Story Feature + 3-Column Craftsmanship Narrative.
+{% endcomment %}
+
+<!-- 00. Hero Video Banner with Full-Bleed Top 1/2 Frame -->
+<section class="editorial-hero">
+  <video
+    class="editorial-hero-video"
+    src="{{ section.settings.video_url | default: 'assets/videos/discover_video.mp4' }}"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="auto"
+  ></video>
+  <div class="editorial-hero-overlay"></div>
+
+  <div class="editorial-hero-content">
+    <a href="/collections/all" class="btn-primary-explore font-sans" aria-label="Explore Catalogue">
+      <span>EXPLORE CATALOGUE</span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- Brand Mission & Story Segment -->
+<section class="discover-story-segment">
+  <div class="container">
+    <div class="discover-story-card">
+      <span class="discover-story-eyebrow">ABOUT FABERELIN</span>
+      <h3 class="discover-story-heading font-sans">Everyday Comfort. Designed for India.</h3>
+      <p class="discover-story-text">
+        Welcome to FABERELIN, your new destination for everyday comfort! We believe that exceptionally comfortable clothing shouldn't break the bank. Designed specifically for India, our mission is to provide premium apparel that effortlessly moves with you. More than just a brand, FABERELIN is building a vibrant, inclusive community nationwide. Join us and experience true comfort!
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="story-asymmetric-section">
+  <div class="container">
+    
+    <!-- 01. Asymmetric 2-Column Split -->
+    <div class="story-2col-layout">
+      
+      <!-- Left Media Frame -->
+      <div class="story-img-frame">
+        <img
+          src="{{ section.settings.story_image | default: 'assets/images/black_essential_hoodie_2.png' }}"
+          alt="Atelier craftsmanship silhouette"
+          width="1200"
+          height="1500"
+          loading="lazy"
+        >
+      </div>
+
+      <!-- Right Editorial Column -->
+      <div class="story-content-col">
+        <span class="product-badge-pill">EDITORIAL ESSAY 04</span>
+        <h2 class="font-sans" style="font-size: var(--text-2xl); font-weight: 700; line-height: 1.2; color: var(--color-primary);">
+          {{ section.settings.headline | default: 'The Tactile Memory of Unbleached Normandy Flax' }}
+        </h2>
+        <p style="font-size: var(--text-base); line-height: 1.7; color: var(--color-text-muted);">
+          {{ section.settings.body_text | default: 'Unlike synthetics engineered for disposability, authentic European linen improves with time. Every wash softens the fibers, while retaining structural tensile integrity. Our master weavers in Normandy preserve centuries-old hand-guided shuttle looms to create an airy 190 GSM weave that naturally thermoregulates across all seasons.' }}
+        </p>
+        <div>
+          <a href="/collections/all" class="btn-primary" style="display: inline-flex; width: auto; padding-inline: var(--spacing-lg); align-items: center; gap: 0.5rem;">
+            <span>EXPLORE CATALOGUE</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 02. 3-Column Craftsmanship Grid -->
+    <div class="craft-3col-section">
+      <div style="text-align: center; max-width: 600px; margin-inline: auto;">
+        <span class="product-badge-pill">OUR THREE PILLARS</span>
+        <h3 class="font-sans" style="font-size: var(--text-xl); font-weight: 700; margin-top: var(--spacing-2xs);">Crafted with Uncompromising Integrity</h3>
+      </div>
+
+      <div class="craft-grid">
+        <!-- Col 1 -->
+        <div class="craft-card">
+          <span class="craft-card-num">01 / FIBER</span>
+          <h4 class="craft-card-title">100% Organic Flax</h4>
+          <p class="craft-card-text">Grown exclusively along the coastal belt of Normandy without synthetic pesticides or excessive irrigation, nourished purely by natural rainfall.</p>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="craft-card">
+          <span class="craft-card-num">02 / WEAVE</span>
+          <h4 class="craft-card-title">190 GSM Breathability</h4>
+          <p class="craft-card-text">Woven on slow-speed looms with relaxed tension to yield an airy, moisture-wicking drape that breathes effortlessly during peak summer.</p>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="craft-card">
+          <span class="craft-card-num">03 / ETHICS</span>
+          <h4 class="craft-card-title">Zero-Waste Patterning</h4>
+          <p class="craft-card-text">Every cutting layout is mathematically mapped to minimize textile offcuts, with remnant scraps repurposed for internal garment bindings.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lookbook Story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Feature Story Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "The Tactile Memory of Unbleached Normandy Flax"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Story Narrative",
+      "default": "Unlike synthetics engineered for disposability, authentic European linen improves with time. Every wash softens the fibers, while retaining structural tensile integrity."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook Story"
+    }
+  ]
+}
+{% endschema %}
