@@ -20,17 +20,21 @@
   <!-- Dark overlay to make text readable -->
   <div class="editorial-video-hero__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
 
+  <!-- Centered Heading -->
   <div class="editorial-video-hero__content">
     {%- if section.settings.heading != blank -%}
       <h2 class="editorial-video-hero__heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
+  </div>
 
-    {%- if section.settings.button_link != blank and section.settings.button_label != blank -%}
+  <!-- Bottom-Anchored Button -->
+  {%- if section.settings.button_link != blank and section.settings.button_label != blank -%}
+    <div class="editorial-video-hero__button-wrapper">
       <a href="{{ section.settings.button_link }}" class="editorial-video-hero__button">
         {{ section.settings.button_label }}
       </a>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -87,8 +91,8 @@
   width: 100%;
   aspect-ratio: 16 / 9; /* Desktop Widescreen Ratio */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Centers the heading vertically */
+  justify-content: center; /* Centers the heading horizontally */
   overflow: hidden;
 }
 
@@ -123,40 +127,52 @@
   color: #333;
 }
 
+/* Heading Container */
 .editorial-video-hero__content {
   position: relative;
   z-index: 3;
   text-align: center;
   padding: 0 20px;
-  color: #ffffff;
+  width: 100%;
 }
 
 .editorial-video-hero__heading {
   font-size: 3.5rem;
-  margin-bottom: 30px;
+  margin: 0;
   color: #ffffff;
   letter-spacing: 1px;
 }
 
-/* Updated Button Styles for Faberelin */
+/* Button Wrapper locked to the bottom */
+.editorial-video-hero__button-wrapper {
+  position: absolute;
+  bottom: 40px; /* Distance from the bottom of the video */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 4;
+}
+
+/* Updated Custom Color Button */
 .editorial-video-hero__button {
   display: inline-block;
-  background-color: #A52A2A; /* Sleek black background */
-  color: #F5F5DC; /* White text */
-  border: 1px solid #ffffff; /* Adds a clean border to stand out on dark video overlays */
-  border-radius: 50px; /* Makes the corners perfectly round (pill shape) */
-  padding: 14px 40px; /* Slightly wider padding for the pill look */
+  background-color: #F5F5DC; 
+  color: #A52A2A; 
+  border: 1px solid #F5F5DC; 
+  border-radius: 50px; 
+  padding: 14px 40px; 
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 .editorial-video-hero__button:hover {
-  background-color: #A52A2A; /* Inverts on hover */
+  background-color: #A52A2A; 
   color: #F5F5DC;
+  border-color: #A52A2A;
   transform: translateY(-2px);
 }
 
@@ -170,6 +186,10 @@
     font-size: 2.2rem;
   }
   
+  .editorial-video-hero__button-wrapper {
+    bottom: 30px; /* Moves it slightly closer to the edge on small screens */
+  }
+
   .editorial-video-hero__button {
     padding: 12px 30px;
     font-size: 1rem;
