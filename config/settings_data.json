@@ -20,7 +20,6 @@
         "type": "header",
         "settings": {
           "brand_text": "FABERELIN",
-          "menu": "main-menu",
           "enable_sticky": true
         }
       },
@@ -61,7 +60,7 @@
           "col_1_title": "NEWSLETTER",
           "col_1_text": "Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories.",
           "newsletter_btn_text": "JOIN",
-          "col_2_title": "COLLECTION",
+          "col_2_title": "CATALOGUE",
           "col_3_title": "ORDER TRACKING",
           "col_3_text": "TRACK YOUR ORDER.",
           "col_4_title": "SUPPORT",
