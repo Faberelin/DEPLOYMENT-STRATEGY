@@ -85,7 +85,7 @@
 .editorial-video-hero {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9; /* Locks the section to a 16:9 widescreen ratio */
+  aspect-ratio: 16 / 9; /* Desktop Widescreen Ratio */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,9 +161,14 @@
 
 /* Mobile adjustments */
 @media screen and (max-width: 768px) {
+  .editorial-video-hero {
+    aspect-ratio: 9 / 16; /* Mobile Vertical Ratio */
+  }
+  
   .editorial-video-hero__heading {
     font-size: 2.2rem;
   }
+  
   .editorial-video-hero__button {
     padding: 12px 25px;
     font-size: 1rem;
