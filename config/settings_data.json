@@ -27,7 +27,7 @@
       "hero-editorial": {
         "type": "hero-editorial",
         "settings": {
-          "video_url": "",
+          "video_url": "https://cdn.shopify.com/videos/c/o/v/92ccfe5827a54b78bcaaaaf70f66cad5.mp4",
           "overlay_opacity": 30,
           "heading": "",
           "button_label": "Explore Catalogue",
