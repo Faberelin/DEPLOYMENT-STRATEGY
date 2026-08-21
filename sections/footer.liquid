@@ -1,106 +1,162 @@
 {% comment %}
-  Header Section - Stratos Theme
-  Minimalist luxury navigation with wordmark, catalog link, search trigger, user account, and cart counter badge.
+  Footer Section - Stratos Theme
+  Customizable Multi-Column Editorial Footer (3 or 4 Columns).
+  Features: Brand narrative, newsletter subscribe box, catalogue links, shipping policies, and studio inquiries.
 {% endcomment %}
 
-<style>
-  /* Custom Text Color for Faberelin Header */
-  .site-header .brand-logo span,
-  .site-header .nav-link,
-  .site-header .header-search-input,
-  .site-header .icon-btn,
-  .site-header .cart-count-badge {
-    color: #7E481C !important;
-  }
-
-  /* Ensures the search bar placeholder text matches the aesthetic */
-  .site-header .header-search-input::placeholder {
-    color: #7E481C !important;
-    opacity: 0.7;
-  }
-
-  /* Ensures SVG icons use the exact same color */
-  .site-header svg {
-    color: #7E481C !important;
-  }
-</style>
-
-<header class="site-header" id="SiteHeader">
+<footer class="site-footer" id="SiteFooter">
   <div class="container">
-    <div class="header-inner">
-      <div class="header-left">
-        <a href="/" class="brand-logo" aria-label="{{ shop.name }}">
-          <span>{{ section.settings.brand_text | default: 'FABERELIN' }}</span>
-        </a>
-        
-        <!-- HARDCODED NAVIGATION: Ignores Shopify Admin and only shows Discover & Catalogue -->
-        <nav class="nav-links" aria-label="Main Navigation">
-          <a href="/" class="nav-link {% if request.path == '/' %}is-active{% endif %}">DISCOVER</a>
-          <a href="/collections/all" class="nav-link {% if request.path contains '/collections' %}is-active{% endif %}">CATALOGUE</a>
-        </nav>
+    
+    <div class="footer-grid {{ section.settings.footer_columns | default: 'cols-4' }}" id="FooterGridContainer">
+      
+      <!-- 01. Column: Newsletter -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_1_title | default: 'NEWSLETTER' }}</h4>
+        <p class="footer-col-text">
+          {{ section.settings.col_1_text | default: 'Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories.' }}
+        </p>
+        <form class="newsletter-form" action="/contact#contact_form" method="post">
+          <input
+            type="email"
+            name="contact[email]"
+            class="newsletter-input"
+            placeholder="Your email address"
+            required
+            aria-label="Email Address for newsletter"
+          >
+          <button type="submit" class="newsletter-btn">
+            {{ section.settings.newsletter_btn_text | default: 'JOIN' }}
+          </button>
+        </form>
       </div>
 
-      <div class="header-right">
-        <!-- Background-Blended Search Bar -->
-        <div class="header-search-wrapper">
-          <form action="{{ routes.search_url }}" method="get" role="search" class="header-search-bar">
-            <svg class="header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input
-              type="search"
-              name="q"
-              value="{{ search.terms | escape }}"
-              placeholder="Search catalogue..."
-              class="header-search-input"
-              aria-label="Search garments"
-            />
-          </form>
-        </div>
+      <!-- 02. Column: Navigation -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_2_title | default: 'CATALOGUE ITEMS' }}</h4>
+        <ul class="footer-links-list">
+          <li><a href="/products/casual-t-shirt" class="footer-link">Casual T-Shirt</a></li>
+          <li><a href="/products/polo-t-shirt" class="footer-link">Polo T-Shirt</a></li>
+          <li><a href="/products/oversized-t-shirt" class="footer-link">Oversized T-Shirt</a></li>
+          <li><a href="/products/essential-hoodie" class="footer-link">Essential Hoodie</a></li>
+          <li><a href="/products/oversized-hoodie" class="footer-link">Oversized Hoodie</a></li>
+          <li><a href="/products/essential-sweatpants" class="footer-link">Essential Sweatpants</a></li>
+        </ul>
+      </div>
 
-        <!-- Cart Trigger Button with Dynamic Counter Badge -->
-        <button class="icon-btn" data-action="open-cart" aria-label="Shopping Bag ({{ cart.item_count }} items)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span class="cart-count-badge" id="CartCountBadge">{{ cart.item_count | default: 0 }}</span>
-        </button>
+      <!-- 03. Column: Order Tracking -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_3_title | default: 'ORDER TRACKING' }}</h4>
+        <p class="footer-col-text">
+          {{ section.settings.col_3_text | default: 'Track real-time carbon-neutral shipment progress and carrier dispatch:' }}
+        </p>
+        <form class="tracking-form" action="/apps/tracking" method="get">
+          <input
+            type="text"
+            name="order_id"
+            class="tracking-input"
+            placeholder="#FBR-8924"
+            required
+            aria-label="Order or Tracking Number"
+          />
+          <button type="submit" class="tracking-btn">
+            {{ section.settings.tracking_btn_text | default: 'TRACK' }}
+          </button>
+        </form>
+      </div>
 
-        <!-- User Profile Account Button -->
-        <a href="/account" class="icon-btn" aria-label="Customer Account">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </a>
+      <!-- 04. Column: Support (5 Subgroups) -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{{ section.settings.col_4_title | default: 'SUPPORT' }}</h4>
+        <ul class="footer-links-list">
+          <li><a href="/pages/contact-us" class="footer-link">1. Contact Us</a></li>
+          <li><a href="/policies/shipping-policy" class="footer-link">2. Shipping Policy</a></li>
+          <li><a href="/policies/refund-policy" class="footer-link">3. Refund Policy</a></li>
+          <li><a href="/policies/privacy-policy" class="footer-link">4. Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service" class="footer-link">5. Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright & Intentionality Tagline -->
+    <div class="footer-bottom-bar">
+      <div class="footer-copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | default: 'FABERELIN' }}. ALL RIGHTS RESERVED.
+      </div>
+      <div class="footer-tagline">
+        {{ section.settings.bottom_tagline | default: 'DESIGNED FOR INTENTIONALITY.' }}
       </div>
     </div>
+
   </div>
-</header>
+</footer>
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "Footer",
   "settings": [
     {
-      "type": "text",
-      "id": "brand_text",
-      "label": "Brand Wordmark",
-      "default": "FABERELIN"
+      "type": "select",
+      "id": "footer_columns",
+      "label": "Desktop Column Layout",
+      "options": [
+        { "value": "cols-4", "label": "4 Columns (Brand, Links, Shipping, Contact)" },
+        { "value": "cols-3", "label": "3 Columns (Newsletter, Shipping, Contact)" }
+      ],
+      "default": "cols-4"
     },
     {
-      "type": "checkbox",
-      "id": "enable_sticky",
-      "label": "Enable Sticky Header",
-      "default": true
+      "type": "text",
+      "id": "col_1_title",
+      "label": "Column 1 Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "textarea",
+      "id": "col_1_text",
+      "label": "Column 1 Description",
+      "default": "Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_btn_text",
+      "label": "Newsletter Button Text",
+      "default": "JOIN"
+    },
+    {
+      "type": "text",
+      "id": "col_2_title",
+      "label": "Column 2 Title",
+      "default": "COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "col_3_title",
+      "label": "Column 3 Title",
+      "default": "SHIPPING"
+    },
+    {
+      "type": "textarea",
+      "id": "col_3_text",
+      "label": "Column 3 Description",
+      "default": "Free worldwide shipping on all orders over $250. 30-day carbon-neutral returns."
+    },
+    {
+      "type": "text",
+      "id": "col_4_title",
+      "label": "Column 4 Title",
+      "default": "CONTACT"
+    },
+    {
+      "type": "text",
+      "id": "bottom_tagline",
+      "label": "Bottom Right Tagline",
+      "default": "DESIGNED FOR INTENTIONALITY."
     }
   ],
   "presets": [
     {
-      "name": "Header"
+      "name": "Footer"
     }
   ]
 }
