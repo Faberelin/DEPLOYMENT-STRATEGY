@@ -31,14 +31,12 @@
           "overlay_opacity": 30,
           "heading": "",
           "button_label": "Explore Catalogue",
-          "button_link": ""
+          "button_link": "shopify://collections/all"
         }
       },
       "marquee-banner": {
         "type": "marquee-banner",
-        "settings": {
-          "text_items": "ETHICALLY CRAFTED IN EUROPE | 100% NORMANDY ORGANIC FLAX LINEN | FREE CARBON-NEUTRAL DELIVERY OVER $150"
-        }
+        "settings": {}
       },
       "main-product-standard": {
         "type": "main-product-standard",
