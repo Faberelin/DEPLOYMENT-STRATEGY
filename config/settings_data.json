@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#1A1A1A",
@@ -5,6 +14,63 @@
     "color_bg_alt": "#F3EFEA",
     "color_border": "#E8E2D9",
     "cart_drawer_enabled": true,
-    "free_shipping_threshold": 150
+    "free_shipping_threshold": 150,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "brand_text": "FABERELIN",
+          "menu": "main-menu",
+          "enable_sticky": true
+        }
+      },
+      "hero-editorial": {
+        "type": "hero-editorial",
+        "settings": {
+          "video_url": "",
+          "overlay_opacity": 30,
+          "heading": "",
+          "button_label": "Explore Catalogue",
+          "button_link": ""
+        }
+      },
+      "marquee-banner": {
+        "type": "marquee-banner",
+        "settings": {
+          "text_items": "ETHICALLY CRAFTED IN EUROPE | 100% NORMANDY ORGANIC FLAX LINEN | FREE CARBON-NEUTRAL DELIVERY OVER $150"
+        }
+      },
+      "main-product-standard": {
+        "type": "main-product-standard",
+        "settings": {}
+      },
+      "lookbook-story": {
+        "type": "lookbook-story",
+        "settings": {}
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
+          "title": "YOUR BAG",
+          "enable_shipping_meter": true,
+          "free_shipping_threshold": 150
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_columns": "cols-4",
+          "col_1_title": "NEWSLETTER",
+          "col_1_text": "Subscribe to receive exclusive access to limited edition textile drops, seasonal lookbooks, and atelier stories.",
+          "newsletter_btn_text": "JOIN",
+          "col_2_title": "COLLECTION",
+          "col_3_title": "ORDER TRACKING",
+          "col_3_text": "TRACK YOUR ORDER.",
+          "col_4_title": "SUPPORT",
+          "bottom_tagline": "WHERE HERITAGE MEETS MODERNITY."
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
