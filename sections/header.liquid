@@ -16,9 +16,9 @@
               {{ link.title }}
             </a>
           {% else %}
-            <a href="/pages/discover" class="nav-link">DISCOVER</a>
-            <a href="/collections/all" class="nav-link is-active">CATALOGUE</a>
-            <a href="/pages/atelier" class="nav-link">ATELIER</a>
+            <!-- HOME is renamed to DISCOVER -->
+            <a href="/" class="nav-link {% if request.path == '/' %}is-active{% endif %}">DISCOVER</a>
+            <a href="/collections/all" class="nav-link {% if request.path contains '/collections' %}is-active{% endif %}">CATALOGUE</a>
           {% endfor %}
         </nav>
       </div>
@@ -49,7 +49,7 @@
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          <span class="cart-count-badge" id="CartCountBadge">{{ cart.item_count | default: 2 }}</span>
+          <span class="cart-count-badge" id="CartCountBadge">{{ cart.item_count | default: 0 }}</span>
         </button>
 
         <!-- User Profile Account Button -->
