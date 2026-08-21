@@ -92,7 +92,6 @@
   overflow: hidden;
 }
 
-/* Updated video targeting for perfect native fitting */
 .editorial-video-hero__video {
   position: absolute;
   top: 0;
@@ -139,21 +138,25 @@
   letter-spacing: 1px;
 }
 
+/* Updated Button Styles for Faberelin */
 .editorial-video-hero__button {
   display: inline-block;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 15px 35px;
+  background-color: #000000; /* Sleek black background */
+  color: #ffffff; /* White text */
+  border: 1px solid #ffffff; /* Adds a clean border to stand out on dark video overlays */
+  border-radius: 50px; /* Makes the corners perfectly round (pill shape) */
+  padding: 14px 40px; /* Slightly wider padding for the pill look */
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 .editorial-video-hero__button:hover {
-  background-color: #f0f0f0;
+  background-color: #ffffff; /* Inverts on hover */
+  color: #000000;
   transform: translateY(-2px);
 }
 
@@ -168,7 +171,7 @@
   }
   
   .editorial-video-hero__button {
-    padding: 12px 25px;
+    padding: 12px 30px;
     font-size: 1rem;
   }
 }
