@@ -1,8 +1,109 @@
 {% comment %}
   Footer Section - Stratos Theme
   Customizable Multi-Column Editorial Footer (3 or 4 Columns).
-  Features: Brand narrative, newsletter subscribe box, catalogue links, shipping policies, and studio inquiries.
+  Features: Brand narrative, newsletter subscribe box, catalogue links, shipping policies, and a Support Popup.
 {% endcomment %}
+
+<style>
+  /* Custom popup styling matching the Faberelin aesthetic */
+  .support-popup-btn {
+    background-color: transparent;
+    color: #7E481C;
+    border: 1px solid #7E481C;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .support-popup-btn:hover {
+    background-color: #7E481C;
+    color: #F5F5DC;
+  }
+
+  /* Modal Background Overlay */
+  .support-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .support-modal.is-open {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* Modal Content Box */
+  .support-modal-content {
+    background-color: #F5F5DC;
+    color: #7E481C;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .support-modal.is-open .support-modal-content {
+    transform: translateY(0);
+  }
+
+  /* Close Button (X) */
+  .support-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #7E481C;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .support-modal-close:hover {
+    opacity: 0.6;
+  }
+
+  /* Popup Links List */
+  .popup-links-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+  }
+
+  .popup-links-list li {
+    margin: 15px 0;
+  }
+
+  .popup-links-list a {
+    color: #7E481C;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
+
+  .popup-links-list a:hover {
+    opacity: 0.6;
+  }
+</style>
 
 <footer class="site-footer" id="SiteFooter">
   <div class="container">
@@ -64,16 +165,13 @@
         </form>
       </div>
 
-      <!-- 04. Column: Support (5 Subgroups) -->
+      <!-- 04. Column: Support (Now Triggers Popup) -->
       <div class="footer-col">
         <h4 class="footer-col-title">{{ section.settings.col_4_title | default: 'SUPPORT' }}</h4>
-        <ul class="footer-links-list">
-          <li><a href="/pages/contact-us" class="footer-link">1. Contact Us</a></li>
-          <li><a href="/policies/shipping-policy" class="footer-link">2. Shipping Policy</a></li>
-          <li><a href="/policies/refund-policy" class="footer-link">3. Refund Policy</a></li>
-          <li><a href="/policies/privacy-policy" class="footer-link">4. Privacy Policy</a></li>
-          <li><a href="/policies/terms-of-service" class="footer-link">5. Terms of Service</a></li>
-        </ul>
+        <p class="footer-col-text">Need help with an order or want to view our policies?</p>
+        <button type="button" class="support-popup-btn" id="SupportPopupTrigger">
+          View Policies
+        </button>
       </div>
 
     </div>
@@ -90,6 +188,50 @@
 
   </div>
 </footer>
+
+<!-- SUPPORT POPUP MODAL -->
+<div id="SupportModal" class="support-modal">
+  <div class="support-modal-content">
+    <span class="support-modal-close" id="SupportModalClose">&times;</span>
+    <h2>{{ section.settings.col_4_title | default: 'SUPPORT & POLICIES' }}</h2>
+    <ul class="popup-links-list">
+      <li><a href="/pages/contact-us">Contact Us</a></li>
+      <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+      <li><a href="/policies/refund-policy">Refund Policy</a></li>
+      <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+      <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById("SupportModal");
+    var btn = document.getElementById("SupportPopupTrigger");
+    var span = document.getElementById("SupportModalClose");
+
+    // Open Modal
+    if(btn) {
+      btn.onclick = function() {
+        modal.classList.add("is-open");
+      }
+    }
+
+    // Close Modal via X button
+    if(span) {
+      span.onclick = function() {
+        modal.classList.remove("is-open");
+      }
+    }
+
+    // Close Modal by clicking outside of it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.classList.remove("is-open");
+      }
+    }
+  });
+</script>
 
 {% schema %}
 {
