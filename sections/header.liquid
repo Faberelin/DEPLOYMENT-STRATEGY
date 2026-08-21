@@ -10,18 +10,18 @@
   .site-header .header-search-input,
   .site-header .icon-btn,
   .site-header .cart-count-badge {
-    color: #7E3E25  !important;
+    color: #7E481C !important;
   }
 
   /* Ensures the search bar placeholder text matches the aesthetic */
   .site-header .header-search-input::placeholder {
-    color: #7E3E25  !important;
+    color: #7E481C !important;
     opacity: 0.7;
   }
 
   /* Ensures SVG icons use the exact same color */
   .site-header svg {
-    color: #7E3E25  !important;
+    color: #7E481C !important;
   }
 </style>
 
@@ -32,16 +32,11 @@
         <a href="/" class="brand-logo" aria-label="{{ shop.name }}">
           <span>{{ section.settings.brand_text | default: 'FABERELIN' }}</span>
         </a>
+        
+        <!-- HARDCODED NAVIGATION: Ignores Shopify Admin and only shows Discover & Catalogue -->
         <nav class="nav-links" aria-label="Main Navigation">
-          {% for link in linklists[section.settings.menu].links %}
-            <a href="{{ link.url }}" class="nav-link {% if link.active %}is-active{% endif %}">
-              {{ link.title }}
-            </a>
-          {% else %}
-            <!-- HOME is renamed to DISCOVER -->
-            <a href="/" class="nav-link {% if request.path == '/' %}is-active{% endif %}">DISCOVER</a>
-            <a href="/collections/all" class="nav-link {% if request.path contains '/collections' %}is-active{% endif %}">CATALOGUE</a>
-          {% endfor %}
+          <a href="/" class="nav-link {% if request.path == '/' %}is-active{% endif %}">DISCOVER</a>
+          <a href="/collections/all" class="nav-link {% if request.path contains '/collections' %}is-active{% endif %}">CATALOGUE</a>
         </nav>
       </div>
 
@@ -95,12 +90,6 @@
       "id": "brand_text",
       "label": "Brand Wordmark",
       "default": "FABERELIN"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Main Menu",
-      "default": "main-menu"
     },
     {
       "type": "checkbox",
