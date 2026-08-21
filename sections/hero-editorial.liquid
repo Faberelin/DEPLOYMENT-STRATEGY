@@ -3,15 +3,7 @@
   Cinematic full-bleed hero banner with brand heritage statement and Discover CTA.
 {% endcomment %}
 
-<section class="editorial-hero">
-  <img
-    class="editorial-hero-bg"
-    src="{{ section.settings.image | default: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1920&q=85' }}"
-    alt="{{ section.settings.headline | default: 'The Intentionality of Linen' }}"
-    width="1920"
-    height="1080"
-    loading="eager"
-  >
+
   <div class="editorial-hero-content">
     <div class="editorial-eyebrow">{{ section.settings.eyebrow | default: 'EDITION 04 / TIMELESS SILHOUETTES' }}</div>
     <h2 class="editorial-headline font-sans">{{ section.settings.headline | default: 'Designed for Intentionality. Woven for Longevity.' }}</h2>
