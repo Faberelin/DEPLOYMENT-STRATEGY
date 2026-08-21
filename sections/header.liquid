@@ -3,6 +3,28 @@
   Minimalist luxury navigation with wordmark, catalog link, search trigger, user account, and cart counter badge.
 {% endcomment %}
 
+<style>
+  /* Custom Text Color for Faberelin Header */
+  .site-header .brand-logo span,
+  .site-header .nav-link,
+  .site-header .header-search-input,
+  .site-header .icon-btn,
+  .site-header .cart-count-badge {
+    color: #7E481C !important;
+  }
+
+  /* Ensures the search bar placeholder text matches the aesthetic */
+  .site-header .header-search-input::placeholder {
+    color: #7E481C !important;
+    opacity: 0.7;
+  }
+
+  /* Ensures SVG icons use the exact same color */
+  .site-header svg {
+    color: #7E481C !important;
+  }
+</style>
+
 <header class="site-header" id="SiteHeader">
   <div class="container">
     <div class="header-inner">
